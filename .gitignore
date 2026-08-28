@@ -1,23 +1,26 @@
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# next.js
+/.next/
+/out/
 
-node_modules
-dist
-dist-ssr
-*.local
+# dependencies
+/node_modules
 
-.vscode/*
-!.vscode/extensions.json
-.idea
+# production
+/build
+
+# misc
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.env
+*.pem
+
+# debug
+npm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
