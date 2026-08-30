@@ -7,34 +7,29 @@ import { ArrowRight } from 'lucide-react';
 export function Hero() {
   return (
     <section className="hero">
-      <div className="hero-visual">
+      <div className="hero-bg">
         <img src="/hero-photo.jpg" alt="" />
-        </div>
-      <div className="hero-content">
-        <motion.p
-          className="eyebrow light"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          <span /> HER TANEDE BİR MİRAS
-        </motion.p>
+      </div>
+      <div className="hero-shade" />
+      <div className="container hero-content">
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          className="hero-script"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
         >
-          What is your <em>flavor?</em>
+          What is your flavor?
         </motion.h1>
         <motion.p
           className="hero-copy"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
           A warm bread? Soothing biscuits? A romantic pasta night? Or do you just want to create art through the
           palette of our flours?
         </motion.p>
+        
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,14 +38,6 @@ export function Hero() {
           <Link href="/urunlerimiz" className="button button-gold">
             Ürünlerimizi Keşfedin <ArrowRight size={17} />
           </Link>
-        </motion.div>
-                <motion.div
-          className="hero-bags"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.75 }}
-        >
-          <img src="/product-bags.jpg" alt="Unex un ürünleri" />
         </motion.div>
       </div>
       <div className="hero-scroll">
