@@ -1,4 +1,3 @@
-import { Minus } from 'lucide-react';
 import { products } from '@/lib/data';
 import { PageHero } from '@/components/page-hero';
 import { ProductCard } from '@/components/product-card';
@@ -21,9 +20,7 @@ export default function ProductsPage() {
               </RevealItem>
             ))}
           </RevealGroup>
-          <div className="placeholder-note">
-            <Minus size={16} /> Beş ürün görseli, taslak sonrası gerçek torba fotoğraflarıyla değiştirilecektir.
-          </div>
+
         </div>
       </section>
     </main>

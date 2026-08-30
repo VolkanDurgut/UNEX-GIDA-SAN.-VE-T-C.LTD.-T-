@@ -18,7 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           </div>
         )}
-        <span className="product-number">01 / 06</span>
+        
       </div>
       <div className="product-card-info">
         <div>

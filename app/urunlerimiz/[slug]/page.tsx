@@ -40,12 +40,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <p className="eyebrow">UNEX UN SERİSİ</p>
               <h1>{product.name}</h1>
               <p className="detail-lead">{product.description}</p>
-              <div className="tabs">
-                <button className="tab active">Açıklama</button>
-                <Link href="/iletisim" className="tab">
-                  Sipariş
-                </Link>
-              </div>
+
               <div className="specs">
                 {product.specs.map(([label, value]) => (
                   <div className="spec" key={label}>
