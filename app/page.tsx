@@ -18,9 +18,9 @@ export default function HomePage() {
         <Reveal className="container statement-inner">
           <Sparkles size={25} />
           <h2>
-            Every recipe has a beginning.
+            Her tarifin bir başlangıcı vardır.
             <br />
-            <em>Make yours matter.</em>
+            <em>Sizinkini değerli kılın.</em>
           </h2>
           <Link href="/iletisim" className="button button-outline">
             Bize Ulaşın <ArrowRight size={17} />

@@ -18,7 +18,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
         >
-          What is your flavor?
+          Sizin lezzetiniz ne?
         </motion.h1>
         <motion.p
           className="hero-copy"
@@ -26,8 +26,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          A warm bread? Soothing biscuits? A romantic pasta night? Or do you just want to create art through the
-          palette of our flours?
+          Sıcacık bir ekmek mi? Nefis bisküviler mi? Romantik bir makarna akşamı mı? Yoksa unlarımızın paletiyle
+          sanat mı yaratmak istiyorsunuz?
         </motion.p>
         
         <motion.div

@@ -121,8 +121,8 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 /* ===== TOGETHER WE GROW ===== */
 .together { background: var(--navy); position: relative; color: #fff; }
 .together-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; min-height: 610px; }
-.together-image { height: auto; position: relative; display: flex; align-items: center; }
-.together-image img { width: 100%; height: auto; object-fit: contain; }
+.together-visual { position: relative; height: 460px; }
+.floating-object { position: absolute; width: auto; object-fit: contain; filter: drop-shadow(0 24px 30px rgba(0,0,0,.45)); }
 .wheat-glow { position: absolute; width: 560px; height: 560px; border-radius: 50%; background: rgba(69,102,195,.2); filter: blur(70px); right: -150px; top: 10%; }
 .together-copy { position: relative; padding-left: 35px; }
 .together h2 { font-size: clamp(55px, 7vw, 94px); font-weight: 600; letter-spacing: -.07em; line-height: .85; margin-bottom: 46px; }

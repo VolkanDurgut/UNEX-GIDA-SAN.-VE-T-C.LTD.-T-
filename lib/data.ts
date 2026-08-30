@@ -15,12 +15,12 @@ export const products: Product[] = [
 ];
 
 export const values = [
-  'High Quality Raw Materials',
-  '+30 Years Experience In Milling Industry',
-  'Modern Technology & Equipment',
-  'Business & Risk Management',
-  'Partnership & Support',
-  'Product & Market Follow up',
+  'Yüksek Kaliteli Hammadde',
+  'Değirmencilik Sektöründe 30+ Yıllık Deneyim',
+  'Modern Teknoloji ve Ekipman',
+  'İş ve Risk Yönetimi',
+  'Ortaklık ve Destek',
+  'Ürün ve Pazar Takibi',
 ];
 
 export const suppliers = ['ADM', 'Bunge', 'Cargill', 'Louis Dreyfus', 'Glencore', 'Viterra', 'Olam'];
