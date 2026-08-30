@@ -6,17 +6,12 @@ export type Product = {
 };
 
 export const products: Product[] = [
-  { name: 'Biscuit Flour', slug: 'biscuit-flour', use: 'Biscuits & cookies' },
-  { name: 'Multi-Purpose Flour', slug: 'multi-purpose-flour', use: 'Everyday recipes' },
-  { name: 'Baker Flour', slug: 'baker-flour', use: 'Artisan bread' },
-  {
-    name: 'Baker Plus Flour',
-    slug: 'baker-plus-flour',
-    use: 'Signature loaves',
-    image: '/25ce55938c2d8dd67319689ec105827b.jpeg',
-  },
-  { name: 'Super Baker Flour', slug: 'super-baker-flour', use: 'Professional baking' },
-  { name: 'Noodle and Pasta Flour', slug: 'noodle-and-pasta-flour', use: 'Pasta & noodles' },
+  { name: 'Biscuit Flour', slug: 'biscuit-flour', use: 'Biscuits & cookies', image: '/biscuit-flour.png' },
+  { name: 'Multi-Purpose Flour', slug: 'multi-purpose-flour', use: 'Everyday recipes', image: '/multi-purpose-flour.png' },
+  { name: 'Baker Flour', slug: 'baker-flour', use: 'Artisan bread', image: '/baker-flour.png' },
+  { name: 'Baker Plus Flour', slug: 'baker-plus-flour', use: 'Signature loaves', image: '/baker-plus-flour.png' },
+  { name: 'Super Baker Flour', slug: 'super-baker-flour', use: 'Professional baking', image: '/super-baker-flour.png' },
+  { name: 'Noodle and Pasta Flour', slug: 'noodle-and-pasta-flour', use: 'Pasta & noodles', image: '/noodle-and-pasta-flour.png' },
 ];
 
 export const values = [

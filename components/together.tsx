@@ -9,7 +9,7 @@ export function Together() {
       <div className="container together-grid">
         <Reveal direction="left">
           <div className="together-image">
-            <img src="/unex1.jpeg" alt="Together We Grow buğday illüstrasyonu" />
+            <img src="/wheat-accent.jpg" alt="Together We Grow buğday illüstrasyonu" />
           </div>
         </Reveal>
 
