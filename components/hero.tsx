@@ -7,8 +7,10 @@ import { ArrowRight } from 'lucide-react';
 export function Hero() {
   return (
     <section className="hero">
-      <div className="hero-overlay" />
-      <div className="container hero-content">
+      <div className="hero-visual">
+        <img src="/hero-photo.jpg" alt="" />
+        </div>
+      <div className="hero-content">
         <motion.p
           className="eyebrow light"
           initial={{ opacity: 0, y: 16 }}
@@ -41,6 +43,14 @@ export function Hero() {
           <Link href="/urunlerimiz" className="button button-gold">
             Ürünlerimizi Keşfedin <ArrowRight size={17} />
           </Link>
+        </motion.div>
+                <motion.div
+          className="hero-bags"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.75 }}
+        >
+          <img src="/product-bags.jpg" alt="Unex un ürünleri" />
         </motion.div>
       </div>
       <div className="hero-scroll">
