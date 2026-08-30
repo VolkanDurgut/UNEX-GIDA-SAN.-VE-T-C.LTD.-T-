@@ -3,19 +3,20 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
-import { products } from '@/lib/data';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 
 const navItems = [
   { href: '/', label: 'Anasayfa' },
   { href: '/hakkimizda', label: 'Hakkımızda' },
+  { href: '/urunlerimiz', label: 'Ürünlerimiz' },
+  { href: '/kalitemiz', label: 'Kalitemiz' },
+  { href: '/katalog', label: 'Katalog' },
 ];
 
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
 
   return (
     <motion.header
@@ -36,45 +37,16 @@ export function Header() {
 
         <nav className={`nav ${mobileOpen ? 'nav-open' : ''}`}>
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? 'active' : ''}`}>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`nav-link ${pathname === item.href ? 'active' : ''}`}
+              onClick={() => setMobileOpen(false)}
+            >
               {item.label}
             </Link>
           ))}
-
-          <div className="nav-dropdown">
-            <button
-              className={`nav-link ${pathname?.startsWith('/urunlerimiz') ? 'active' : ''}`}
-              onClick={() => setProductsOpen(!productsOpen)}
-            >
-              Ürünlerimiz <ChevronDown size={14} />
-            </button>
-            <AnimatePresence>
-              {productsOpen && (
-                <motion.div
-                  className="dropdown-menu"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  {products.map((product) => (
-                    <Link key={product.slug} href={`/urunlerimiz/${product.slug}`} onClick={() => setProductsOpen(false)}>
-                      {product.name}
-                      <ArrowUpRight size={14} />
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <Link href="/kalitemiz" className={`nav-link ${pathname === '/kalitemiz' ? 'active' : ''}`}>
-            Kalitemiz
-          </Link>
-          <Link href="/katalog" className={`nav-link ${pathname === '/katalog' ? 'active' : ''}`}>
-            Katalog
-          </Link>
-          <Link href="/iletisim" className="nav-contact">
+          <Link href="/iletisim" className="nav-contact" onClick={() => setMobileOpen(false)}>
             İletişim <ArrowUpRight size={15} />
           </Link>
         </nav>

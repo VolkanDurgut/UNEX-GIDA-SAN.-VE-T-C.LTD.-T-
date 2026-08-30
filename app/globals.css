@@ -27,7 +27,7 @@ h1, h2, h3, h4, p { margin: 0; }
 h1, h2, h3, h4 { font-family: var(--font-poppins), sans-serif; line-height: 1.12; }
 h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color: var(--gold); font-style: normal; }
 
-.site-shell { min-height: 100vh; overflow: hidden; }
+.site-shell { min-height: 100vh; overflow-x: hidden; }
 .container { width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
 
 /* ===== HEADER ===== */

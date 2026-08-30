@@ -1,0 +1,31 @@
+import { Minus } from 'lucide-react';
+import { products } from '@/lib/data';
+import { PageHero } from '@/components/page-hero';
+import { ProductCard } from '@/components/product-card';
+import { RevealGroup, RevealItem } from '@/components/motion-primitives';
+
+export default function ProductsPage() {
+  return (
+    <main className="page-main">
+      <PageHero
+        eyebrow="UNEX PALETİ"
+        title={<>Ürünlerimiz<span>.</span></>}
+        text="Her un, iyi bir fikrin ve daha iyi bir lezzetin başlangıcıdır."
+      />
+      <section className="section-padding product-list-section">
+        <div className="container">
+          <RevealGroup className="product-grid">
+            {products.map((product) => (
+              <RevealItem key={product.slug}>
+                <ProductCard product={product} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          <div className="placeholder-note">
+            <Minus size={16} /> Beş ürün görseli, taslak sonrası gerçek torba fotoğraflarıyla değiştirilecektir.
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
