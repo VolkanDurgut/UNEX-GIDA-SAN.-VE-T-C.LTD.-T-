@@ -9,16 +9,10 @@ export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = products.find((item) => item.slug === params.slug);
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = products.find((item) => item.slug === slug);
   if (!product) return notFound();
-
-  const specs = [
-    ['Protein', product.slug === 'biscuit-flour' ? '%9,5 min.' : 'İçerik güncellenecek'],
-    ['Gluten', product.slug === 'biscuit-flour' ? '%22 min.' : 'İçerik güncellenecek'],
-    ['Ash', product.slug === 'biscuit-flour' ? '%0,65 max.' : 'İçerik güncellenecek'],
-    ['Moisture', product.slug === 'biscuit-flour' ? '%14 max.' : 'İçerik güncellenecek'],
-  ];
 
   return (
     <main className="page-main">
@@ -45,24 +39,15 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             <div className="detail-copy">
               <p className="eyebrow">UNEX UN SERİSİ</p>
               <h1>{product.name}</h1>
-              <p className="detail-lead">
-                Her üretim fikrinin ihtiyaç duyduğu güvenilir temel. Ürününüz için doğru performansı birlikte
-                bulalım.
-              </p>
+              <p className="detail-lead">{product.description}</p>
               <div className="tabs">
                 <button className="tab active">Açıklama</button>
                 <Link href="/iletisim" className="tab">
                   Sipariş
                 </Link>
               </div>
-              <div className="body-copy">
-                <p>
-                  Ürün detayları ve teknik spesifikasyonlar güncellenmektedir. Daha fazla bilgi ve numune
-                  talepleriniz için bizimle iletişime geçebilirsiniz.
-                </p>
-              </div>
               <div className="specs">
-                {specs.map(([label, value]) => (
+                {product.specs.map(([label, value]) => (
                   <div className="spec" key={label}>
                     <span>{label}</span>
                     <strong>{value}</strong>
