@@ -137,6 +137,12 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 42px; }
 .section-heading h2, .catalog-section h2, .related h2 { font-size: clamp(38px, 5vw, 62px); color: var(--navy); letter-spacing: -.05em; }
 .product-strip, .related-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(235px, 1fr); grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.product-strip.is-carousel { grid-template-columns: none; grid-auto-columns: minmax(260px, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+.product-strip.is-carousel::-webkit-scrollbar { display: none; }
+.product-strip.is-carousel .product-card { scroll-snap-align: start; }
+.product-strip.is-carousel { grid-template-columns: none; grid-auto-columns: minmax(260px, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+.product-strip.is-carousel::-webkit-scrollbar { display: none; }
+.product-strip.is-carousel > * { scroll-snap-align: start; }
 .product-card { min-width: 0; transition: transform .3s; cursor: pointer; display: block; }
 .product-card:hover { transform: translateY(-8px); }
 .product-visual { height: 330px; background: #e4e0d7; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
@@ -155,6 +161,8 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .strip-controls div { display: flex; gap: 4px; }
 .strip-controls button { border: 1px solid #c7c2b9; width: 33px; height: 33px; display: grid; place-items: center; }
 .strip-controls button:hover { border-color: var(--gold); color: var(--gold); }
+.strip-controls button:disabled { opacity: .35; cursor: default; }
+.strip-controls button:disabled:hover { border-color: #c7c2b9; color: var(--soft); }
 
 /* ===== ALT CTA BANT ===== */
 .statement-band { background: var(--gold); color: #fff; }
