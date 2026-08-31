@@ -304,7 +304,6 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .container { width: calc(100% - 32px); }
   .hero-script { font-size: 34px; }
   .hero-copy { font-size: 14px; }
-  .hero-bags { max-width: 190px; }
   .section-heading { align-items: flex-start; gap: 20px; flex-direction: column; }
   .intro-section h2, .about-story h2, .quality-copy h2 { font-size: 43px; }
   .together h2 { font-size: 70px; }
