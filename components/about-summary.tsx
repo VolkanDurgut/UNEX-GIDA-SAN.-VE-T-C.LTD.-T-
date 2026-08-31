@@ -12,7 +12,7 @@ export function AboutSummary() {
   return (
     <section className="intro-section section-padding" id="hakkimizda">
       <div className="container intro-grid">
-        <Reveal direction="left">
+        <Reveal>
           <div>
             <p className="eyebrow">UNEX HAKKINDA</p>
             <h2>
@@ -20,10 +20,13 @@ export function AboutSummary() {
               <br />
               <em>yerde.</em>
             </h2>
+            <div className="intro-visual">
+              <img src="/artisan-bread.jpg" alt="Unex unuyla pişirilmiş el yapımı ekmek" />
+            </div>
           </div>
         </Reveal>
 
-        <Reveal direction="right" delay={0.1}>
+        <Reveal delay={0.15}>
           <div className="intro-copy">
             <p>Ham buğday tanesinden, dünyanın her mutfağındaki lezzete uzanan bir dönüşüm hikayesi.</p>
             <p>
