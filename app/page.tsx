@@ -11,8 +11,8 @@ export default function HomePage() {
     <main>
       <Hero />
       <AboutSummary />
-      <Together />
       <ProductPreview />
+      <Together />
 
       <section className="statement-band">
         <Reveal className="container statement-inner">

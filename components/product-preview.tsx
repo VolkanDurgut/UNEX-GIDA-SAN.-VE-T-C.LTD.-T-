@@ -35,11 +35,13 @@ export function ProductPreview() {
     <section className="products-section section-padding">
       <div className="container">
         <Reveal>
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">UNEX PALETİ</p>
-              <h2>Ürünlerimiz</h2>
-            </div>
+          <div className="intro-heading">
+            <h2>Ürünlerimiz</h2>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <div className="section-heading section-heading-centered">
             <Link href="/urunlerimiz" className="text-link">
               Tüm ürünleri gör <ArrowUpRight size={17} />
             </Link>
