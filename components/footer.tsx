@@ -21,7 +21,6 @@ export function Footer() {
               <h4>KURUMSAL</h4>
               <Link href="/kalitemiz">Kalitemiz</Link>
               <Link href="/katalog">Katalog</Link>
-              <span>Referanslar</span>
             </div>
             <div className="footer-column">
               <h4>ÜRÜN GRUPLARI</h4>
