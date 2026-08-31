@@ -14,6 +14,8 @@ export function ProductPreview() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  const indexRef = useRef(0);
+
   const scrollToIndex = useCallback((next: number) => {
     const track = trackRef.current;
     if (!track) return;
@@ -22,22 +24,16 @@ export function ProductPreview() {
     if (card) {
       track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
     }
+    indexRef.current = next;
+    setIndex(next);
   }, []);
 
   const goNext = useCallback(() => {
-    setIndex((current) => {
-      const next = (current + 1) % products.length;
-      scrollToIndex(next);
-      return next;
-    });
+    scrollToIndex((indexRef.current + 1) % products.length);
   }, [scrollToIndex]);
 
   const goPrev = useCallback(() => {
-    setIndex((current) => {
-      const next = (current - 1 + products.length) % products.length;
-      scrollToIndex(next);
-      return next;
-    });
+    scrollToIndex((indexRef.current - 1 + products.length) % products.length);
   }, [scrollToIndex]);
 
   useEffect(() => {
