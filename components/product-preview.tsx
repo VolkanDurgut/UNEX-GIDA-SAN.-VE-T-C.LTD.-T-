@@ -1,46 +1,35 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { products } from '@/lib/data';
 import { ProductCard } from './product-card';
 import { Reveal } from './motion-primitives';
 
-const AUTO_ADVANCE_MS = 4000;
+const PAGE_SIZE = 3;
+const AUTO_ADVANCE_MS = 5000;
 
 export function ProductPreview() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  const indexRef = useRef(0);
-
-  const scrollToIndex = useCallback((next: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const cards = track.querySelectorAll<HTMLElement>('.product-card');
-    const card = cards[next];
-    if (card) {
-      track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+  const pages = useMemo(() => {
+    const chunks: (typeof products)[] = [];
+    for (let i = 0; i < products.length; i += PAGE_SIZE) {
+      chunks.push(products.slice(i, i + PAGE_SIZE));
     }
-    indexRef.current = next;
-    setIndex(next);
+    return chunks;
   }, []);
 
-  const goNext = useCallback(() => {
-    scrollToIndex((indexRef.current + 1) % products.length);
-  }, [scrollToIndex]);
+  const [page, setPage] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const goPrev = useCallback(() => {
-    scrollToIndex((indexRef.current - 1 + products.length) % products.length);
-  }, [scrollToIndex]);
+  const goTo = useCallback((next: number) => setPage((next + pages.length) % pages.length), [pages.length]);
 
   useEffect(() => {
-    if (paused) return;
-    const timer = setInterval(goNext, AUTO_ADVANCE_MS);
+    if (paused || pages.length < 2) return;
+    const timer = setInterval(() => goTo(page + 1), AUTO_ADVANCE_MS);
     return () => clearInterval(timer);
-  }, [goNext, paused]);
+  }, [page, paused, pages.length, goTo]);
 
   return (
     <section className="products-section section-padding">
@@ -57,32 +46,37 @@ export function ProductPreview() {
           </div>
         </Reveal>
 
-        <div
-          ref={trackRef}
-          className="product-strip is-carousel"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          {products.map((product, i) => (
-            <Reveal key={product.slug} delay={i * 0.06}>
-              <ProductCard product={product} />
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="strip-controls">
-          <span>
-            0{index + 1} — 0{products.length}
-          </span>
-          <div>
-            <button aria-label="Önceki" onClick={goPrev}>
-              <ChevronLeft size={18} />
-            </button>
-            <button aria-label="Sonraki" onClick={goNext}>
-              <ChevronRight size={18} />
-            </button>
+        <Reveal delay={0.1}>
+          <div className="product-strip" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={page}
+                className="product-strip-track"
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -24 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {pages[page].map((product) => (
+                  <ProductCard key={product.slug} product={product} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
+
+          {pages.length > 1 && (
+            <div className="dots">
+              {pages.map((_, index) => (
+                <button
+                  key={index}
+                  aria-label={`Sayfa ${index + 1}`}
+                  className={index === page ? 'is-active' : ''}
+                  onClick={() => goTo(index)}
+                />
+              ))}
+            </div>
+          )}
+        </Reveal>
       </div>
     </section>
   );
