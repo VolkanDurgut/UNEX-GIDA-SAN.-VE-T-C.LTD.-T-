@@ -22,7 +22,7 @@ export default function HomePage() {
             <br />
             <em>Sizinkini değerli kılın.</em>
           </h2>
-          <Link href="/iletisim" className="button button-outline">
+          <Link href="/iletisim" className="button button-gold">
             Bize Ulaşın <ArrowRight size={17} />
           </Link>
         </Reveal>

@@ -66,7 +66,7 @@ export function Together() {
 
         <div className="together-copy">
           <Reveal delay={0.15}>
-            <p className="eyebrow light">
+            <p className="eyebrow">
               <span /> SÖZÜMÜZ
             </p>
             <h2>

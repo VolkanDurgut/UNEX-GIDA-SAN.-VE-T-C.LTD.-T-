@@ -11,6 +11,7 @@ export function Hero() {
         <img src="/hero-photo.jpg" alt="" />
       </div>
       <div className="hero-shade" />
+      <div className="hero-fade-bottom" />
       <div className="container hero-content">
         <motion.h1
           className="hero-script"

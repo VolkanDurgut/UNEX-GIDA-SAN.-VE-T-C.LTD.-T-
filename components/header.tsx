@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 
@@ -17,10 +17,26 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const isHomepage = pathname === '/';
+
+  useEffect(() => {
+    if (!isHomepage) {
+      setScrolled(true);
+      return;
+    }
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHomepage]);
+
+  const transparent = isHomepage && !scrolled;
 
   return (
     <motion.header
-      className="header"
+      className={`header ${transparent ? 'header-transparent' : ''}`}
       initial={{ y: -90, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -46,10 +62,14 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href="/iletisim" className="nav-contact" onClick={() => setMobileOpen(false)}>
+          <Link href="/iletisim" className="nav-contact nav-contact-mobile" onClick={() => setMobileOpen(false)}>
             İletişim <ArrowUpRight size={15} />
           </Link>
         </nav>
+
+        <Link href="/iletisim" className="nav-contact nav-contact-desktop">
+          İletişim <ArrowUpRight size={15} />
+        </Link>
       </div>
     </motion.header>
   );
