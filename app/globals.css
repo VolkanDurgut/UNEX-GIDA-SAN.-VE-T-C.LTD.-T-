@@ -144,16 +144,17 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .taste-item span { font-size: 10px; letter-spacing: .04em; color: var(--soft); display: block; text-align: center; }
 
 /* ===== TOGETHER WE GROW ===== */
-.together { background: #faf8f5; position: relative; color: var(--ink); border-top: 1px solid #eeeae2; overflow: hidden; }
+.together { background: #07121c; position: relative; color: rgba(255,255,255,.85); overflow: hidden; }
+.together .container { position: relative; z-index: 2; }
 .together-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; min-height: 610px; }
 .together-visual { position: relative; height: 460px; }
 .floating-object { position: absolute; width: auto; object-fit: contain; filter: drop-shadow(0 24px 30px rgba(0,0,0,.45)); }
 .wheat-glow { position: absolute; width: 560px; height: 560px; border-radius: 50%; background: rgba(232,124,72,.08); filter: blur(70px); right: -150px; top: 10%; }
 .together-copy { position: relative; padding-left: 35px; }
-.together h2 { font-size: clamp(55px, 7vw, 94px); font-weight: 600; letter-spacing: -.07em; line-height: .85; margin-bottom: 46px; color: var(--navy); }
+.together h2 { font-size: clamp(55px, 7vw, 94px); font-weight: 600; letter-spacing: -.07em; line-height: .85; margin-bottom: 46px; color: #fff; }
 .together h2 em { color: var(--gold); }
 .value-list { display: grid; gap: 16px; }
-.value-item { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--gray); }
+.value-item { display: flex; align-items: center; gap: 12px; font-size: 12px; color: rgba(255,255,255,.75); }
 .value-item span { color: var(--gold); font-size: 10px; width: 20px; }
 .value-item svg { color: var(--gold); }
 
@@ -288,7 +289,8 @@ input:focus, textarea:focus { border-color: var(--gold); }
 .related .product-visual { height: 255px; }
 
 /* ===== FOOTER ===== */
-.footer { background: #07121c; color: #fff; padding: 78px 0 24px; }
+.footer { background: #07121c; color: #fff; padding: 78px 0 24px; position: relative; overflow: hidden; }
+.footer .container { position: relative; z-index: 2; }
 .footer-top { display: grid; grid-template-columns: 2fr .8fr 1.5fr 1fr; gap: 50px; padding-bottom: 70px; }
 .footer-about img { width: 74px; height: 74px; object-fit: contain; margin-bottom: 20px; }
 .footer-about p { font-size: 12px; line-height: 1.75; color: rgba(255,255,255,.65); max-width: 360px; }

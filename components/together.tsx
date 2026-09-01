@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { values } from '@/lib/data';
 import { Reveal, RevealGroup, RevealItem } from './motion-primitives';
+import { FlourDust } from './flour-dust';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -35,6 +36,7 @@ function SettleItem({
 export function Together() {
   return (
     <section className="together section-padding">
+      <FlourDust />
       <div className="wheat-glow" />
       <div className="container together-grid">
         <Reveal>
@@ -66,7 +68,7 @@ export function Together() {
 
         <div className="together-copy">
           <Reveal delay={0.15}>
-            <p className="eyebrow">
+            <p className="eyebrow light">
               <span /> SÖZÜMÜZ
             </p>
             <h2>

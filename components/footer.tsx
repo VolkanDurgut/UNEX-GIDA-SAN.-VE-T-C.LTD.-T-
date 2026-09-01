@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { Clock3 } from 'lucide-react';
 import { products } from '@/lib/data';
 import { Reveal } from './motion-primitives';
+import { FlourDust } from './flour-dust';
 
 export function Footer() {
   return (
     <footer className="footer">
+      <FlourDust />
       <div className="container">
         <Reveal>
           <div className="footer-top">

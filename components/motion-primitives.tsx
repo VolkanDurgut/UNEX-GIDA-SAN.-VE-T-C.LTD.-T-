@@ -13,7 +13,7 @@ type RevealProps = {
 };
 
 const offsets: Record<NonNullable<RevealProps['direction']>, { x?: number; y?: number }> = {
-  up: { y: 28 },
+  up: { y: 56 },
   left: { x: -28 },
   right: { x: 28 },
   none: {},
@@ -23,7 +23,7 @@ export function Reveal({ children, delay = 0, direction = 'up', className }: Rev
   const reduce = useReducedMotion();
   const variants: Variants = {
     hidden: { opacity: 0, ...offsets[direction] },
-    visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, delay, ease: EASE } },
+    visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.9, delay, ease: EASE } },
   };
 
   return (
