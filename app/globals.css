@@ -35,6 +35,8 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .header-transparent { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
 .header-transparent .brand span, .header-transparent .nav-link { color: #fff; }
 .header-transparent .nav-link:after { background: var(--gold); }
+.header-transparent .nav-contact { background: var(--gold); }
+.header-transparent .nav-contact:hover { background: var(--gold-hover); }
 .header-inner { height: 100%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
 .brand { display: flex; align-items: center; gap: 12px; color: var(--navy); font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: .12em; }
 .brand img { width: 47px; height: 47px; object-fit: contain; }
