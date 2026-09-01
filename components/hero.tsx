@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { FlourDust } from './flour-dust';
 
 export function Hero() {
   return (
@@ -11,6 +12,7 @@ export function Hero() {
         <img src="/hero-photo.jpg" alt="" />
       </div>
       <div className="hero-shade" />
+            <FlourDust />
       <div className="hero-fade-bottom" />
       <div className="container hero-content">
         <motion.h1
