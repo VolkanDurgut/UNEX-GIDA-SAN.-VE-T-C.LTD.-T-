@@ -26,6 +26,11 @@ export function FlourDust() {
   const [particles, setParticles] = useState<Particle[] | null>(null);
 
   useEffect(() => {
+    // Parçacıklar bilinçli olarak sadece client'ta (mount sonrası) üretiliyor:
+    // Math.random() sunucu render'ında çalışırsa server/client hydration uyuşmazlığı
+    // (hydration mismatch) oluşur. Bu yüzden ilk render'da null dönüp, mount sonrası
+    // state'i dolduruyoruz — react-hooks/set-state-in-effect burada kasıtlı bir istisna.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setParticles(makeParticles(34));
   }, []);
 

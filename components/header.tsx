@@ -17,22 +17,19 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [homeScrolled, setHomeScrolled] = useState(false);
 
   const isHomepage = pathname === '/';
 
   useEffect(() => {
-    if (!isHomepage) {
-      setScrolled(true);
-      return;
-    }
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    if (!isHomepage) return;
+    const onScroll = () => setHomeScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, [isHomepage]);
 
-  const transparent = isHomepage && !scrolled;
+  const transparent = isHomepage && !homeScrolled;
 
   return (
     <motion.header
