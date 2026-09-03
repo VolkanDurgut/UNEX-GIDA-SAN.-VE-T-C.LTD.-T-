@@ -1,8 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { suppliers } from '@/lib/data';
 import { PageHero } from '@/components/page-hero';
 import { Reveal, RevealGroup, RevealItem } from '@/components/motion-primitives';
+
+export const metadata: Metadata = {
+  title: 'Kalitemiz',
+  description:
+    'Güvenilir tedarik zinciri, dünyanın önde gelen tarım emtiası ortaklarıyla çalışma ve kesintisiz destek — Unex Gıda kalite anlayışı.',
+};
 
 export default function QualityPage() {
   return (

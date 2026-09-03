@@ -1,8 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { ArrowRight } from 'lucide-react';
 import { PageHero } from '@/components/page-hero';
 import { Stats } from '@/components/stats';
 import { Reveal } from '@/components/motion-primitives';
+
+export const metadata: Metadata = {
+  title: 'Hakkımızda',
+  description:
+    '30 yılı aşkın tecrübe, 1 milyon tonun üzerinde işlenen buğday unu ve 50\'den fazla ülkeye ihracat — Unex Gıda\'nın hikayesi.',
+};
 
 export default function AboutPage() {
   return (

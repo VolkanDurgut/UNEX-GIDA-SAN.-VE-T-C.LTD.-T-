@@ -8,6 +8,7 @@
   color: #111418;
   background: #f7f5f0;
   font-synthesis: none;
+  /* --- Renk --- */
   --navy: #223057;
   --gold: #e87c48;
   --gold-hover: #d66a36;
@@ -16,7 +17,52 @@
   --soft: #6d6f73;
   --cream: #ffffff;
   --line: #dedbd4;
+
+  /* --- Aralık (spacing) ölçeği --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 108px;
+
+  /* --- Tipografi ölçeği --- */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 23px;
+  --text-2xl: clamp(28px, 4.2vw, 60px);
+  --text-3xl: clamp(40px, 5vw, 68px);
+
+  /* --- Köşe yuvarlama --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* --- Gölge --- */
+  --shadow-sm: 0 10px 22px rgba(232, 124, 72, .2);
+  --shadow-md: 0 18px 50px rgba(34, 48, 87, .07);
+  --shadow-lg: 0 14px 28px rgba(232, 124, 72, .3);
+
+  /* --- Geçiş süresi --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: .2s;
+  --duration-base: .3s;
+  --duration-slow: .6s;
 }
+
+/*
+  Not (Faz 1 — Tasarım Sistemi):
+  Yukarıdaki token seti, siteyi baştan yazmadan aşamalı olarak tutarlılaştırmak için eklendi.
+  Var olan sabit değerler (px cinsinden padding, gölge, süre vb.) mevcut görünümü bozmamak adına
+  bu fazda tek tek değiştirilmedi; yeni eklenecek bileşenler ve Faz 3'teki hareket/etkileşim
+  katmanı bu tokenler üzerinden inşa edilecek. Mevcut CSS'in kademeli olarak bu tokenlere taşınması
+  ayrı, düşük riskli bir temizlik görevi olarak backlog'a alınabilir.
+*/
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -155,7 +201,8 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .about-carousel-viewport { overflow: hidden; flex: 1; }
 .about-carousel-track { display: flex; transition: transform .5s cubic-bezier(.22,1,.36,1); }
 .about-carousel-item { flex: 0 0 33.3333%; display: flex; align-items: center; justify-content: center; padding: 0 8px; }
-.about-carousel-item img { width: 100%; height: 150px; object-fit: contain; filter: drop-shadow(6px 10px 10px rgba(0,0,0,.35)); }
+.about-carousel-item .img-wrap { position: relative; width: 100%; height: 150px; filter: drop-shadow(6px 10px 10px rgba(0,0,0,.35)); }
+.about-carousel-item .img-wrap img { object-fit: contain; }
 .about-carousel-arrow { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); color: #fff; background: transparent; display: grid; place-items: center; flex-shrink: 0; transition: border-color .2s, color .2s; }
 .about-carousel-arrow:hover { border-color: var(--gold); color: var(--gold); }
 
@@ -185,8 +232,9 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .product-visual { height: 330px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 .product-visual:not(.has-image):before { content: ''; position: absolute; width: 190px; height: 260px; background: linear-gradient(145deg, rgba(255,255,255,.5), rgba(208,202,191,.3)); transform: rotate(4deg); box-shadow: 12px 15px 24px rgba(34,48,87,.1); }
 .product-visual.has-image { background: #fff; }
-.product-visual img { position: relative; width: 78%; height: 88%; object-fit: contain; filter: drop-shadow(8px 14px 10px rgba(18,23,32,.19)); transition: transform .3s; }
-.product-card:hover .product-visual img { transform: scale(1.05) rotate(1.5deg); }
+.product-visual .img-wrap { position: relative; width: 78%; height: 88%; filter: drop-shadow(8px 14px 10px rgba(18,23,32,.19)); transition: transform .3s; }
+.product-visual .img-wrap img { object-fit: contain; }
+.product-card:hover .product-visual .img-wrap { transform: scale(1.05) rotate(1.5deg); }
 .placeholder { position: relative; z-index: 1; text-align: center; color: #9b978f; display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 11px; line-height: 1.4; letter-spacing: .07em; }
 .product-card-info { display: flex; align-items: center; justify-content: space-between; padding: 18px 2px; border-bottom: 1px solid #cfcac1; color: var(--navy); }
 .product-card-info h3 { font-size: 16px; font-weight: 600; }
@@ -287,8 +335,9 @@ input:focus, textarea:focus { border-color: var(--gold); }
 
 .product-detail { background: #eeeae2; }
 .detail-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 95px; align-items: center; }
-.detail-visual { height: 580px; background: #e1ddd4; display: flex; align-items: center; justify-content: center; }
-.detail-visual img { width: 82%; height: 90%; object-fit: contain; filter: drop-shadow(12px 18px 14px rgba(18,23,32,.19)); }
+.detail-visual { height: 580px; background: #e1ddd4; display: flex; align-items: center; justify-content: center; position: relative; }
+.detail-visual .img-wrap { position: relative; width: 82%; height: 90%; filter: drop-shadow(12px 18px 14px rgba(18,23,32,.19)); }
+.detail-visual .img-wrap img { object-fit: contain; }
 .detail-visual .placeholder.large { font-size: 13px; }
 .detail-copy h1 { font-size: clamp(40px, 5vw, 68px); color: var(--navy); letter-spacing: -.06em; line-height: 1; }
 .detail-lead { color: var(--gray); font-size: 16px; line-height: 1.7; margin: 24px 0 32px; max-width: 470px; }
@@ -342,7 +391,7 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .intro-copy { padding-top: 0; }
   .intro-hero { min-height: 620px; padding: 90px 0 50px; }
   .intro-hero-copy { max-width: 100%; }
-  .about-carousel-item img { height: 110px; }
+  .about-carousel-item .img-wrap { height: 110px; }
   .together-grid { padding-top: 20px; padding-bottom: 30px; }
   .together-copy { padding-left: 0; }
   .product-strip { overflow-x: auto; grid-template-columns: none; grid-auto-columns: 270px; padding-bottom: 12px; }

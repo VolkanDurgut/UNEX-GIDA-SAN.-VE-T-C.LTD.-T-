@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
 import { ArrowRight, PackageOpen } from 'lucide-react';
 import { products } from '@/lib/data';
 import { ProductCard } from '@/components/product-card';
@@ -7,6 +9,24 @@ import { Reveal, RevealGroup, RevealItem } from '@/components/motion-primitives'
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const product = products.find((item) => item.slug === slug);
+  if (!product) return {};
+
+  return {
+    title: product.name,
+    description: `${product.description} Kullanım alanı: ${product.use}.`,
+    openGraph: product.image
+      ? { images: [{ url: product.image, width: 800, height: 800, alt: product.name }] }
+      : undefined,
+  };
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,7 +41,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <Reveal direction="left">
             <div className={`detail-visual ${product.image ? 'has-image' : ''}`}>
               {product.image ? (
-                <img src={product.image} alt={product.name} />
+                <div className="img-wrap">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    priority
+                    sizes="(max-width: 900px) 90vw, 500px"
+                  />
+                </div>
               ) : (
                 <div className="placeholder large">
                   <PackageOpen size={38} />

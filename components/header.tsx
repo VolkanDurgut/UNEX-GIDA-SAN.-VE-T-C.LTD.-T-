@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -40,7 +41,7 @@ export function Header() {
     >
       <div className="container header-inner">
         <Link href="/" className="brand" aria-label="Unex ana sayfa">
-          <img src="/logo.png" alt="Unex" />
+          <Image src="/logo.png" alt="Unex Gıda" width={47} height={47} priority />
           <span>UNEX GIDA</span>
         </Link>
 

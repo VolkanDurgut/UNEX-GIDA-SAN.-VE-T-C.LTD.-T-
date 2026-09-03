@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, PackageOpen } from 'lucide-react';
 import { Product } from '@/lib/data';
 
@@ -7,7 +8,14 @@ export function ProductCard({ product }: { product: Product }) {
     <Link href={`/urunlerimiz/${product.slug}`} className="product-card">
       <div className={`product-visual ${product.image ? 'has-image' : ''}`}>
         {product.image ? (
-          <img src={product.image} alt={product.name} />
+          <div className="img-wrap">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 900px) 45vw, 260px"
+            />
+          </div>
         ) : (
           <div className="placeholder">
             <PackageOpen size={25} />
