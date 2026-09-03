@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
 import { products } from '@/lib/data';
 import { PageHero } from '@/components/page-hero';
 import { ProductCard } from '@/components/product-card';
 import { RevealGroup, RevealItem } from '@/components/motion-primitives';
+
+export const metadata: Metadata = {
+  title: 'Ürünlerimiz',
+  description:
+    'Biscuit Flour, Multi-Purpose Flour, Baker Flour, Baker Plus Flour, Super Baker Flour ve Noodle & Pasta Flour — Unex Gıda buğday unu serisi.',
+};
 
 export default function ProductsPage() {
   return (

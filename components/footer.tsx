@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock3 } from 'lucide-react';
 import { products } from '@/lib/data';
 import { Reveal } from './motion-primitives';
@@ -12,7 +13,7 @@ export function Footer() {
         <Reveal>
           <div className="footer-top">
             <div className="footer-about">
-              <img src="/logo.png" alt="Unex" />
+              <Image src="/logo.png" alt="Unex Gıda" width={74} height={74} />
               <p>
                 Başarımızın anahtarı ve her zaman korumaya çalıştığımız değer, ortaklarımızla oluşturduğumuz
                 güvendir. Hem tedarikçi hem de alıcı tarafta yer alan bir firma olarak emtia piyasalarında

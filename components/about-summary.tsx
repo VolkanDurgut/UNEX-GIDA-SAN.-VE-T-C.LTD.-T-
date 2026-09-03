@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -36,7 +37,7 @@ export function AboutSummary() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
       >
-        <img src="/about-bg.jpg" alt="" />
+        <Image src="/about-bg.jpg" alt="" fill sizes="100vw" />
       </motion.div>
       <div className="intro-shade" />
       <FlourDust />
@@ -85,7 +86,11 @@ export function AboutSummary() {
                 >
                   {products.map((product) => (
                     <div className="about-carousel-item" key={product.slug}>
-                      {product.image ? <img src={product.image} alt={product.name} /> : null}
+                      {product.image ? (
+                        <div className="img-wrap">
+                          <Image src={product.image} alt={product.name} fill sizes="(max-width: 900px) 33vw, 220px" />
+                        </div>
+                      ) : null}
                     </div>
                   ))}
                 </div>
