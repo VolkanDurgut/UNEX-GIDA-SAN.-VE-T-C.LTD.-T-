@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Handshake } from 'lucide-react';
 import { PageHero } from '@/components/page-hero';
 import { Stats } from '@/components/stats';
+import { FlourDust } from '@/components/flour-dust';
 import { Reveal } from '@/components/motion-primitives';
 
 export const metadata: Metadata = {
@@ -24,42 +25,47 @@ export default function AboutPage() {
           </>
         }
         text="Kalite, dinamizm ve profesyonellik ile dünyanın dört bir yanına ulaşan bir ortaklık."
+        image="/team-photo.jpg"
+        theme="light"
       />
 
-      <section className="section-padding about-story">
-        <div className="container about-grid">
-          <Reveal direction="left">
-            <div>
-              <p className="eyebrow">UNEX HAKKINDA</p>
-              <h2>
-                Birlikte büyüyen
-                <br />
-                <em>30+ yıllık hikaye.</em>
-              </h2>
-            </div>
-          </Reveal>
-          <Reveal direction="right" delay={0.1}>
-            <div className="body-copy">
-              <p>
-                Uluslararası buğday unu ve emtia piyasasında 30 yılı aşkın tecrübemizle 1.000.000 tonun üzerinde
-                buğday unu elleçledik. Kalite, dinamizm ve profesyonellik gibi temel değerlerimiz, Türkiye&apos;nin
-                en büyük buğday unu ihracatçılarından biri olmamızı sağlamıştır.
-              </p>
-              <p>
-                Bugüne kadar 50&apos;den fazla ülkeye yaptığımız ihracat sayesinde kaliteli buğday unlarımızı
-                dünyanın her köşesinden müşterilerimize ulaştırmanın gururunu yaşıyoruz. Müşterilerimize
-                uzmanlığımızı ve deneyimimizi sunarak onlarla stratejik bir ortak olmaya çalışıyoruz.
-              </p>
-            </div>
-          </Reveal>
+      <section className="about-navy-block">
+        <FlourDust />
+        <div className="about-navy-content">
+          <div className="container about-grid">
+            <Reveal direction="left">
+              <div>
+                <p className="eyebrow">UNEX HAKKINDA</p>
+                <h2>
+                  Birlikte büyüyen
+                  <br />
+                  <em>30+ yıllık hikaye.</em>
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal direction="right" delay={0.1}>
+              <div className="body-copy">
+                <p>
+                  Uluslararası buğday unu ve emtia piyasasında 30 yılı aşkın tecrübemizle 1.000.000 tonun üzerinde
+                  buğday unu elleçledik. Kalite, dinamizm ve profesyonellik gibi temel değerlerimiz,
+                  Türkiye&apos;nin en büyük buğday unu ihracatçılarından biri olmamızı sağlamıştır.
+                </p>
+                <p>
+                  Bugüne kadar 50&apos;den fazla ülkeye yaptığımız ihracat sayesinde kaliteli buğday unlarımızı
+                  dünyanın her köşesinden müşterilerimize ulaştırmanın gururunu yaşıyoruz. Müşterilerimize
+                  uzmanlığımızı ve deneyimimizi sunarak onlarla stratejik bir ortak olmaya çalışıyoruz.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
+
+        <Stats />
       </section>
 
-      <Stats />
-
-      <section className="cta-block">
-        <Reveal className="container">
-          <p className="eyebrow light">BİRLİKTE BÜYÜYELİM</p>
+      <section className="statement-band">
+        <Reveal className="container statement-inner">
+          <Handshake size={25} />
           <h2>
             Ortaklığınızı
             <br />

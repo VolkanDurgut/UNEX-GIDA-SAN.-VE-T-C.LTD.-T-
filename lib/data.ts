@@ -102,8 +102,8 @@ export const values = [
 
 export const suppliers = ['ADM', 'Bunge', 'Cargill', 'Louis Dreyfus', 'Glencore', 'Viterra', 'Olam'];
 
-export const stats: [string, string][] = [
-  ['30+', 'Yıl deneyim'],
-  ['1M+', 'Ton buğday'],
-  ['50+', 'Ülkeye ihracat'],
+export const stats: { value: number; suffix: string; label: string }[] = [
+  { value: 30, suffix: '+', label: 'Yıl deneyim' },
+  { value: 1, suffix: 'M+', label: 'Ton buğday' },
+  { value: 50, suffix: '+', label: 'Ülkeye ihracat' },
 ];

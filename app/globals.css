@@ -169,7 +169,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .intro-heading { text-align: center; max-width: 920px; margin: 0 auto 64px; }
 .intro-heading h2 { font-size: clamp(28px, 4.2vw, 60px); white-space: normal; }
 .eyebrow.center { display: flex; justify-content: center; }
-.about-story h2, .quality-copy h2 { font-size: clamp(40px, 5vw, 68px); color: var(--navy); font-weight: 600; letter-spacing: -.045em; }
+.quality-copy h2 { font-size: clamp(40px, 5vw, 68px); color: var(--navy); font-weight: 600; letter-spacing: -.045em; }
 .intro-heading h2 { color: var(--navy); font-weight: 600; letter-spacing: -.045em; }
 .section-heading-centered { display: flex; justify-content: center; margin-bottom: 42px; }
 .intro-copy { max-width: 480px; }
@@ -277,18 +277,64 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .page-hero-content { position: relative; }
 .page-hero h1 { font-size: clamp(46px, 7vw, 88px); font-weight: 600; letter-spacing: -.065em; line-height: .95; }
 .page-hero h1 span { color: var(--gold); }
-.page-hero h1 em { color: #f4b18d; }
+.page-hero h1 em { color: var(--gold); }
+.page-hero .eyebrow span { background: var(--gold); }
 .page-hero-content > p:last-child { max-width: 410px; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.74); margin-top: 20px; }
 
-.about-story, .quality-copy { background: var(--cream); }
-.about-grid, .quality-layout { align-items: start; }
-.about-story h2, .quality-copy h2 { font-size: clamp(38px, 5vw, 64px); }
+/* ===== İÇ SAYFA HERO — açık (beyaz) varyasyon =====
+   İki koyu/lacivert bölümün art arda gelmesini istemediğimiz sayfalarda
+   (örn. Hakkımızda) kullanılır: zemin beyaz, başlık lacivert, fotoğraf
+   sağda kalır ve soldaki metin alanına doğru beyaza yumuşar. */
+.page-hero-light { background: #fff; color: var(--navy); }
+.page-hero-light .page-hero-shade {
+  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.92) 22%, rgba(255,255,255,.45) 38%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 60%);
+}
+.page-hero-light > img { object-position: center 58%; }
 
-.stats { background: var(--navy); color: #fff; padding: 68px 0; }
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.stat { padding-left: 28px; border-left: 1px solid rgba(255,255,255,.2); display: flex; flex-direction: column; gap: 7px; }
-.stat strong { font-family: 'Poppins', sans-serif; font-size: 68px; line-height: 1; color: #f4ad87; letter-spacing: -.07em; }
-.stat span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.62); }
+/* ===== İHRACAT HARİTASI (Hakkımızda Hero'su) =====
+   Görsel alanı sadece sağ ~62%'de tutuyoruz ki soldaki metinle çakışmasın;
+   .page-hero-shade zaten soldan beyaza yumuşatıyor. */
+.page-hero-visual { position: absolute; top: 0; right: 0; bottom: 0; width: 62%; overflow: hidden; }
+.export-map { width: 100%; height: 100%; overflow: hidden; }
+.export-dot { fill: var(--gold); }
+.export-dot-ping {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: .6;
+  opacity: .7;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: export-ping 2.6s ease-out infinite;
+}
+@keyframes export-ping {
+  0% { r: 1.6; opacity: .7; }
+  100% { r: 6.5; opacity: 0; }
+}
+.page-hero-light h1 { color: var(--navy); }
+.page-hero-light .page-hero-content > p:last-child { color: rgba(34,48,87,.72); }
+
+.quality-copy { background: var(--cream); }
+.about-grid, .quality-layout { align-items: start; }
+.quality-copy h2 { font-size: clamp(38px, 5vw, 64px); }
+
+/* ===== HAKKIMIZDA: "Birlikte büyüyen" + İstatistikler — tek, kesintisiz
+   lacivert blok. FlourDust bu bloğun tamamını (başlık alanı + istatistik
+   şeridi) kaplayacak şekilde bir kez, en dışta render ediliyor. ===== */
+.about-navy-block { position: relative; overflow: hidden; background: #07121c; color: #fff; }
+.about-navy-block h2 { font-size: clamp(38px, 5vw, 64px); color: #fff; font-weight: 600; letter-spacing: -.045em; }
+.about-navy-block .eyebrow { color: #fff; }
+.about-navy-block .body-copy p { color: rgba(255,255,255,.78); }
+.about-navy-content { padding: 90px 0 56px; position: relative; z-index: 2; }
+.about-navy-block > .stats { position: relative; z-index: 2; }
+
+.stats { padding: 0 0 90px; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.stat { padding-left: 28px; border-left: 1px solid rgba(255,255,255,.18); display: flex; flex-direction: column; gap: 12px; }
+.stat-icon { color: var(--gold); }
+.stat-value { display: flex; align-items: baseline; gap: 5px; }
+.stat-value strong { font-family: 'Poppins', sans-serif; font-size: 56px; line-height: 1; color: #fff; letter-spacing: -.03em; }
+.stat-suffix { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 600; color: var(--gold); }
+.stat-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); }
 
 .cta-block { background: linear-gradient(135deg, var(--navy), #16223f); position: relative; color: #fff; padding: 105px 0; }
 .cta-block .container { position: relative; }
@@ -415,7 +461,7 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .hero-script { font-size: 34px; }
   .hero-copy { font-size: 14px; }
   .section-heading { align-items: flex-start; gap: 20px; flex-direction: column; }
-  .intro-section h2, .about-story h2, .quality-copy h2 { font-size: 43px; }
+  .intro-section h2, .about-navy-block h2, .quality-copy h2 { font-size: 43px; }
   .together h2 { font-size: 70px; }
   .product-grid { grid-template-columns: 1fr; gap: 30px; }
   .product-visual { height: 345px; }
