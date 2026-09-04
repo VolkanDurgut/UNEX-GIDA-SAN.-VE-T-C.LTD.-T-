@@ -1,0 +1,13 @@
+diff --git a/app/globals.css b/app/globals.css
+index 4ae46ed..7c0f26c 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -288,7 +288,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ /* ===== HAKKIMIZDA: "Birlikte büyüyen" + İstatistikler — tek, kesintisiz
+    lacivert blok. FlourDust bu bloğun tamamını (başlık alanı + istatistik
+    şeridi) kaplayacak şekilde bir kez, en dışta render ediliyor. ===== */
+-.about-navy-block { position: relative; overflow: hidden; background: var(--navy); color: #fff; }
++.about-navy-block { position: relative; overflow: hidden; background: linear-gradient(135deg, #0c141c, #091118); color: #fff; }
+ .about-navy-block h2 { font-size: clamp(38px, 5vw, 64px); color: #fff; font-weight: 600; letter-spacing: -.045em; }
+ .about-navy-block .eyebrow { color: #fff; }
+ .about-navy-block .body-copy p { color: rgba(255,255,255,.78); }

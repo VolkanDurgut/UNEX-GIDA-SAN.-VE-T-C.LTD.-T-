@@ -2,16 +2,12 @@
 
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import { CalendarClock, Wheat, Globe } from 'lucide-react';
 import { stats } from '@/lib/data';
 
-function splitNumber(raw: string): { number: number; suffix: string } {
-  const match = raw.match(/^(\d+)(.*)$/);
-  if (!match) return { number: 0, suffix: raw };
-  return { number: Number(match[1]), suffix: match[2] };
-}
+const ICONS = [CalendarClock, Wheat, Globe];
 
-function Counter({ value }: { value: string }) {
-  const { number, suffix } = splitNumber(value);
+function Counter({ value }: { value: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const count = useMotionValue(0);
@@ -19,15 +15,14 @@ function Counter({ value }: { value: string }) {
 
   useEffect(() => {
     if (inView) {
-      const controls = animate(count, number, { duration: 1.4, ease: 'easeOut' });
+      const controls = animate(count, value, { duration: 1.4, ease: 'easeOut' });
       return () => controls.stop();
     }
-  }, [inView, number, count]);
+  }, [inView, value, count]);
 
   return (
     <strong ref={ref}>
       <motion.span>{rounded}</motion.span>
-      {suffix}
     </strong>
   );
 }
@@ -36,19 +31,30 @@ export function Stats() {
   return (
     <section className="stats">
       <div className="container stats-grid">
-        {stats.map(([number, label], index) => (
-          <motion.div
-            className="stat"
-            key={label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6, delay: index * 0.12 }}
-          >
-            <Counter value={number} />
-            <span>{label}</span>
-          </motion.div>
-        ))}
+        {stats.map(({ value, suffix, label }, index) => {
+          const Icon = ICONS[index];
+          return (
+            <motion.div
+              className="stat"
+              key={label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.6, delay: index * 0.12 }}
+            >
+              {Icon ? (
+                <div className="stat-icon">
+                  <Icon size={22} />
+                </div>
+              ) : null}
+              <div className="stat-value">
+                <Counter value={value} />
+                <span className="stat-suffix">{suffix}</span>
+              </div>
+              <span className="stat-label">{label}</span>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

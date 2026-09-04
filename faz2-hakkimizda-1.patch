@@ -1,0 +1,59 @@
+diff --git a/app/hakkimizda/page.tsx b/app/hakkimizda/page.tsx
+index 58ed89d..10f61b4 100644
+--- a/app/hakkimizda/page.tsx
++++ b/app/hakkimizda/page.tsx
+@@ -1,6 +1,6 @@
+ import Link from 'next/link';
+ import type { Metadata } from 'next';
+-import { ArrowRight } from 'lucide-react';
++import { ArrowRight, Handshake } from 'lucide-react';
+ import { PageHero } from '@/components/page-hero';
+ import { Stats } from '@/components/stats';
+ import { Reveal } from '@/components/motion-primitives';
+@@ -24,6 +24,7 @@ export default function AboutPage() {
+           </>
+         }
+         text="Kalite, dinamizm ve profesyonellik ile dünyanın dört bir yanına ulaşan bir ortaklık."
++        image="/hero-photo.jpg"
+       />
+ 
+       <section className="section-padding about-story">
+@@ -57,9 +58,9 @@ export default function AboutPage() {
+ 
+       <Stats />
+ 
+-      <section className="cta-block">
+-        <Reveal className="container">
+-          <p className="eyebrow light">BİRLİKTE BÜYÜYELİM</p>
++      <section className="statement-band">
++        <Reveal className="container statement-inner">
++          <Handshake size={25} />
+           <h2>
+             Ortaklığınızı
+             <br />
+diff --git a/components/page-hero.tsx b/components/page-hero.tsx
+index 2219db8..49cc398 100644
+--- a/components/page-hero.tsx
++++ b/components/page-hero.tsx
+@@ -1,17 +1,21 @@
+ import { ReactNode } from 'react';
++import Image from 'next/image';
+ import { Reveal } from './motion-primitives';
+ 
+ export function PageHero({
+   eyebrow,
+   title,
+   text,
++  image,
+ }: {
+   eyebrow: string;
+   title: ReactNode;
+   text: string;
++  image?: string;
+ }) {
+   return (
+     <section className="page-hero">
++      {image ? <Image src={image} alt="" fill priority sizes="100vw" /> : null}
+       <div className="page-hero-shade" />
+       <div className="container page-hero-content">
+         <Reveal>
