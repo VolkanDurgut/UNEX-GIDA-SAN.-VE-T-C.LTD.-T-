@@ -41,7 +41,7 @@ export function Footer() {
                 08:30–18:00
               </p>
               <p>
-                Cumartesi 08:30–15:00
+                Cumartesi 08:30–18:00
                 <br />
                 Pazar KAPALI
               </p>

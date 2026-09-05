@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { PageHero } from '@/components/page-hero';
-import { Reveal } from '@/components/motion-primitives';
-import { CatalogGrid } from '@/components/catalog-grid';
+import { FlourDust } from '@/components/flour-dust';
+import { CatalogShowcase } from '@/components/catalog-showcase';
 
 export const metadata: Metadata = {
   title: 'Katalog',
@@ -21,19 +21,12 @@ export default function CatalogPage() {
           </>
         }
         text="Ürünlerimiz ve uzmanlığımız hakkında daha fazlası."
+        image="/team-photo.jpg"
       />
       <section className="section-padding catalog-section">
+        <FlourDust />
         <div className="container">
-          <Reveal>
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">İNDİRME MERKEZİ</p>
-                <h2>Kataloglar</h2>
-              </div>
-            </div>
-          </Reveal>
-
-          <CatalogGrid />
+          <CatalogShowcase />
         </div>
       </section>
     </main>
