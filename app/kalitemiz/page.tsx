@@ -61,6 +61,30 @@ export default function QualityPage() {
         </div>
       </section>
 
+      <section className="statement-certs">
+        <div className="container">
+          <Reveal>
+            <p className="eyebrow">SERTİFİKALAR</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <div className="cert-badges-image">
+              <Image
+                src="/certifications-badges-white.png"
+                alt="ISO 9001, ISO 10002, ISO 14001, ISO 22000 ve Helal Gıda sertifikaları"
+                width={1151}
+                height={180}
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="cert-note">
+              Bu sertifikalar; gıda güvenliğine, izlenebilirliğe ve sürekli iyileştirmeye olan bağlılığımızı
+              yansıtmaktadır.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="quality-navy-block">
         <FlourDust />
         <div className="section-padding quality-hygiene">
@@ -126,29 +150,6 @@ export default function QualityPage() {
             Birlikte Çalışalım <ArrowRight size={17} />
           </Link>
         </Reveal>
-        <div className="statement-certs">
-          <div className="container">
-            <Reveal>
-              <p className="eyebrow">SERTİFİKALAR</p>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <div className="cert-badges-image">
-                <Image
-                  src="/certifications-badges-white.png"
-                  alt="ISO 9001, ISO 10002, ISO 14001, ISO 22000 ve Helal Gıda sertifikaları"
-                  width={1151}
-                  height={180}
-                />
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="cert-note">
-                Bu sertifikalar; gıda güvenliğine, izlenebilirliğe ve sürekli iyileştirmeye olan bağlılığımızı
-                yansıtmaktadır.
-              </p>
-            </Reveal>
-          </div>
-        </div>
       </section>
     </main>
   );
