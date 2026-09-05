@@ -1,0 +1,59 @@
+diff --git a/app/globals.css b/app/globals.css
+index a2fe100..8c39035 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -348,14 +348,9 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ .product-list-section { background: #eeeae2; }
+ .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
+ 
+-.quality-copy-visual { display: flex; align-items: center; justify-content: center; gap: 16px; }
++.quality-copy-visual { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 56px; }
+ .quality-copy-visual img { filter: drop-shadow(10px 16px 14px rgba(18,23,32,.16)); }
+ 
+-/* Kalitemiz'in "İşinizi ileri taşırız" bölümü 3 sütuna çıkıyor (başlık |
+-   çuvallar | metin) — .about-grid'in 2 sütunlu düzenine dokunmadan,
+-   sadece .quality-layout için daha spesifik/sonraki bir kural. */
+-.quality-layout { grid-template-columns: .85fr .55fr 1.15fr; gap: 40px; }
+-
+ .contact-section, .catalog-section, .related { background: var(--cream); }
+ .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; }
+ .contact-details h2 { font-size: clamp(40px, 5vw, 64px); color: var(--navy); letter-spacing: -.05em; margin-bottom: 46px; }
+diff --git a/app/kalitemiz/page.tsx b/app/kalitemiz/page.tsx
+index 4d79a6f..6d151c5 100644
+--- a/app/kalitemiz/page.tsx
++++ b/app/kalitemiz/page.tsx
+@@ -34,18 +34,10 @@ export default function QualityPage() {
+             <div>
+               <p className="eyebrow">ORTAKLIK VE DESTEK</p>
+               <h2>
+-                İşinizi
+-                <br />
+-                <em>ileri taşırız.</em>
++                İşinizi <em>ileri taşırız.</em>
+               </h2>
+             </div>
+           </Reveal>
+-          <Reveal delay={0.05}>
+-            <div className="quality-copy-visual">
+-              <FloatingBag src="/baker-flour.png" phase={0} />
+-              <FloatingBag src="/multi-purpose-flour.png" phase={0.5} />
+-            </div>
+-          </Reveal>
+           <Reveal direction="right" delay={0.1}>
+             <div className="body-copy">
+               <p>
+@@ -60,6 +52,14 @@ export default function QualityPage() {
+             </div>
+           </Reveal>
+         </div>
++        <div className="container">
++          <Reveal delay={0.1}>
++            <div className="quality-copy-visual">
++              <FloatingBag src="/baker-flour.png" phase={0} />
++              <FloatingBag src="/multi-purpose-flour.png" phase={0.5} />
++            </div>
++          </Reveal>
++        </div>
+       </section>
+ 
+       <section className="statement-band">

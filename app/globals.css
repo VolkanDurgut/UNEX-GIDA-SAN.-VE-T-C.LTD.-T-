@@ -273,8 +273,11 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
   background: linear-gradient(135deg, var(--navy) 0%, #1c2b52 55%, #2a3a68 100%);
 }
 .page-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; filter: saturate(.85); }
+.hero-slideshow { position: absolute; inset: 0; overflow: hidden; }
+.hero-slideshow-frame { position: absolute; inset: 0; }
+.hero-slideshow-frame img { object-fit: cover; object-position: center 45%; filter: saturate(.85); }
 .page-hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,17,28,.87), rgba(8,17,28,.3)); }
-.page-hero-content { position: relative; }
+.page-hero-content { position: relative; z-index: 2; }
 .page-hero h1 { font-size: clamp(46px, 7vw, 88px); font-weight: 600; letter-spacing: -.065em; line-height: .95; }
 .page-hero h1 span { color: var(--gold); }
 .page-hero h1 em { color: var(--gold); }
@@ -290,6 +293,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
   background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.92) 22%, rgba(255,255,255,.45) 38%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 60%);
 }
 .page-hero-light > img { object-position: center 58%; }
+.page-hero-light .hero-slideshow-frame img { object-position: center 55%; }
 
 /* ===== İHRACAT HARİTASI (Hakkımızda Hero'su) =====
    Görsel alanı sadece sağ ~62%'de tutuyoruz ki soldaki metinle çakışmasın;
@@ -344,17 +348,30 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .product-list-section { background: #eeeae2; }
 .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
 
-.supplier-band { padding: 78px 0; background: #e7e3dc; }
-.supplier-list { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; align-items: center; }
-.supplier-list span { font-family: 'Poppins', sans-serif; font-size: 16px; color: #a7a39c; text-align: center; transition: color .25s, transform .25s; }
-.supplier-list span:hover { color: var(--navy); transform: translateY(-4px); }
+/* "İşinizi ileri taşırız" — ihracat ağı görseli (gerçek fotoğraf, beyaz
+   zeminde kart görünümünde). */
+.page-hero-map-overlay { position: absolute; inset: 0; mix-blend-mode: screen; opacity: .9; pointer-events: none; }
+.page-hero-map-overlay img { object-fit: cover; object-position: center; }
 
-.quality-bottom { background: var(--gold); color: #fff; }
-.quality-bottom-inner { display: flex; align-items: center; gap: 20px; padding: 45px 0; }
-.quality-bottom-inner > div { flex: 1; }
-.quality-bottom h3 { font-size: 23px; margin-bottom: 6px; }
-.quality-bottom p { font-size: 13px; color: rgba(255,255,255,.82); }
-.quality-bottom .text-link { color: #fff; border-color: #fff; }
+/* "İşinizi ileri taşırız" — 6 gerçek ürünümüz, Türk bayrağı rozetli,
+   ortada perspective+rotateY ile gerçek 3D salınan bir dünya görseliyle
+   iki yana ayrılmış. */
+.quality-product-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; margin-top: 56px; }
+.quality-product-card { position: relative; text-align: center; }
+.quality-product-card img { position: relative; z-index: 1; width: 100%; height: auto; filter: drop-shadow(6px 10px 10px rgba(18,23,32,.14)); }
+.quality-product-card p { margin-top: 8px; font-size: 11px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.quality-product-card p span { display: block; font-weight: 500; color: var(--soft); font-size: 10px; }
+.quality-product-flag {
+  position: absolute; top: -2px; right: 4px; z-index: 2;
+  width: 24px; height: 24px; border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,.18);
+}
+/* Çuvalın altına, zemine oturmuş hissi veren yumuşak oval gölge. */
+.quality-product-shadow {
+  width: 70%; height: 14px; margin: 2px auto 0;
+  background: radial-gradient(ellipse at center, rgba(18,23,32,.22) 0%, rgba(18,23,32,0) 72%);
+}
 
 .contact-section, .catalog-section, .related { background: var(--cream); }
 .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; }
@@ -446,7 +463,6 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .stats-grid { gap: 15px; }
   .stat { padding-left: 14px; }
   .stat strong { font-size: 48px; }
-  .supplier-list { grid-template-columns: repeat(4, 1fr); gap: 26px 8px; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 38px; }
   .footer-about { grid-column: 1 / -1; }
   .contact-grid { gap: 55px; }
@@ -469,7 +485,6 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .stat { border-left: 0; border-top: 1px solid rgba(255,255,255,.2); padding: 20px 0 0; }
   .stat:first-child { border-top: 0; padding-top: 0; }
   .stat strong { font-size: 54px; }
-  .supplier-list { grid-template-columns: repeat(2, 1fr); }
   .statement-inner { padding: 48px 0; flex-wrap: wrap; }
   .statement-inner h2 { flex-basis: calc(100% - 50px); }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
@@ -483,6 +498,7 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .spec:nth-child(-n+2) { border-bottom: 1px solid #cbc6bd; }
   .catalog-card { padding: 26px; }
   .page-hero h1 { font-size: 52px; }
+  .quality-product-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

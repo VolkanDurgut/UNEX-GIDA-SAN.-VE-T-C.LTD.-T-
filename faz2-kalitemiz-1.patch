@@ -1,0 +1,164 @@
+diff --git a/app/globals.css b/app/globals.css
+index abc3129..5a04b80 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -274,7 +274,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ }
+ .page-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; filter: saturate(.85); }
+ .page-hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,17,28,.87), rgba(8,17,28,.3)); }
+-.page-hero-content { position: relative; }
++.page-hero-content { position: relative; z-index: 2; }
+ .page-hero h1 { font-size: clamp(46px, 7vw, 88px); font-weight: 600; letter-spacing: -.065em; line-height: .95; }
+ .page-hero h1 span { color: var(--gold); }
+ .page-hero h1 em { color: var(--gold); }
+@@ -344,17 +344,8 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ .product-list-section { background: #eeeae2; }
+ .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
+ 
+-.supplier-band { padding: 78px 0; background: #e7e3dc; }
+-.supplier-list { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; align-items: center; }
+-.supplier-list span { font-family: 'Poppins', sans-serif; font-size: 16px; color: #a7a39c; text-align: center; transition: color .25s, transform .25s; }
+-.supplier-list span:hover { color: var(--navy); transform: translateY(-4px); }
+-
+-.quality-bottom { background: var(--gold); color: #fff; }
+-.quality-bottom-inner { display: flex; align-items: center; gap: 20px; padding: 45px 0; }
+-.quality-bottom-inner > div { flex: 1; }
+-.quality-bottom h3 { font-size: 23px; margin-bottom: 6px; }
+-.quality-bottom p { font-size: 13px; color: rgba(255,255,255,.82); }
+-.quality-bottom .text-link { color: #fff; border-color: #fff; }
++.quality-copy-visual { display: flex; gap: 18px; margin-top: 36px; }
++.quality-copy-visual img { filter: drop-shadow(10px 16px 14px rgba(18,23,32,.16)); }
+ 
+ .contact-section, .catalog-section, .related { background: var(--cream); }
+ .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; }
+@@ -446,7 +437,6 @@ input:focus, textarea:focus { border-color: var(--gold); }
+   .stats-grid { gap: 15px; }
+   .stat { padding-left: 14px; }
+   .stat strong { font-size: 48px; }
+-  .supplier-list { grid-template-columns: repeat(4, 1fr); gap: 26px 8px; }
+   .footer-top { grid-template-columns: 1fr 1fr; gap: 38px; }
+   .footer-about { grid-column: 1 / -1; }
+   .contact-grid { gap: 55px; }
+@@ -469,7 +459,6 @@ input:focus, textarea:focus { border-color: var(--gold); }
+   .stat { border-left: 0; border-top: 1px solid rgba(255,255,255,.2); padding: 20px 0 0; }
+   .stat:first-child { border-top: 0; padding-top: 0; }
+   .stat strong { font-size: 54px; }
+-  .supplier-list { grid-template-columns: repeat(2, 1fr); }
+   .statement-inner { padding: 48px 0; flex-wrap: wrap; }
+   .statement-inner h2 { flex-basis: calc(100% - 50px); }
+   .footer-top { grid-template-columns: 1fr; gap: 32px; }
+diff --git a/app/kalitemiz/page.tsx b/app/kalitemiz/page.tsx
+index e19ea0d..b3c6909 100644
+--- a/app/kalitemiz/page.tsx
++++ b/app/kalitemiz/page.tsx
+@@ -1,9 +1,9 @@
+ import Link from 'next/link';
++import Image from 'next/image';
+ import type { Metadata } from 'next';
+-import { ArrowUpRight, ShieldCheck } from 'lucide-react';
+-import { suppliers } from '@/lib/data';
++import { ArrowRight, ShieldCheck } from 'lucide-react';
+ import { PageHero } from '@/components/page-hero';
+-import { Reveal, RevealGroup, RevealItem } from '@/components/motion-primitives';
++import { Reveal } from '@/components/motion-primitives';
+ 
+ export const metadata: Metadata = {
+   title: 'Kalitemiz',
+@@ -24,6 +24,8 @@ export default function QualityPage() {
+           </>
+         }
+         text="Bugünün ihtiyaçlarını anlayan, yarının pazarlarına hazırlanan bir üretim anlayışı."
++        image="/quality-lab.jpg"
++        flourDust
+       />
+ 
+       <section className="section-padding quality-copy">
+@@ -36,6 +38,10 @@ export default function QualityPage() {
+                 <br />
+                 <em>ileri taşırız.</em>
+               </h2>
++              <div className="quality-copy-visual">
++                <Image src="/baker-flour.png" alt="" width={200} height={260} />
++                <Image src="/multi-purpose-flour.png" alt="" width={200} height={260} />
++              </div>
+             </div>
+           </Reveal>
+           <Reveal direction="right" delay={0.1}>
+@@ -54,30 +60,16 @@ export default function QualityPage() {
+         </div>
+       </section>
+ 
+-      <section className="supplier-band">
+-        <div className="container">
+-          <Reveal>
+-            <p className="eyebrow">GÜVENİLİR İŞ ORTAKLARI</p>
+-          </Reveal>
+-          <RevealGroup className="supplier-list">
+-            {suppliers.map((supplier) => (
+-              <RevealItem key={supplier}>
+-                <span>{supplier}</span>
+-              </RevealItem>
+-            ))}
+-          </RevealGroup>
+-        </div>
+-      </section>
+-
+-      <section className="quality-bottom">
+-        <Reveal className="container quality-bottom-inner">
+-          <ShieldCheck size={32} />
+-          <div>
+-            <h3>Güvenilir tedarik. Kesintisiz destek.</h3>
+-            <p>Dünya tahıl piyasasını yakından takip ediyor, ortaklarımızın risklerini azaltan iş planları sunuyoruz.</p>
+-          </div>
+-          <Link href="/iletisim" className="text-link">
+-            Birlikte çalışalım <ArrowUpRight size={17} />
++      <section className="statement-band">
++        <Reveal className="container statement-inner">
++          <ShieldCheck size={25} />
++          <h2>
++            Güvenilir tedarik.
++            <br />
++            <em>Kesintisiz destek.</em>
++          </h2>
++          <Link href="/iletisim" className="button button-gold">
++            Birlikte Çalışalım <ArrowRight size={17} />
+           </Link>
+         </Reveal>
+       </section>
+diff --git a/components/page-hero.tsx b/components/page-hero.tsx
+index 8d43d76..96f9f82 100644
+--- a/components/page-hero.tsx
++++ b/components/page-hero.tsx
+@@ -1,6 +1,7 @@
+ import { ReactNode } from 'react';
+ import Image from 'next/image';
+ import { Reveal } from './motion-primitives';
++import { FlourDust } from './flour-dust';
+ 
+ export function PageHero({
+   eyebrow,
+@@ -9,6 +10,7 @@ export function PageHero({
+   image,
+   visual,
+   theme = 'dark',
++  flourDust = false,
+ }: {
+   eyebrow: string;
+   title: ReactNode;
+@@ -20,6 +22,8 @@ export function PageHero({
+    *  'light': beyaz zemin, lacivert başlık — iki koyu bölümün art arda
+    *  gelmesini istemediğimiz sayfalarda (örn. Hakkımızda) kullanılır. */
+   theme?: 'dark' | 'light';
++  /** Fotoğrafın arkasında/üzerinde süzülen un tozu efekti (bkz. Hero, Kalitemiz). */
++  flourDust?: boolean;
+ }) {
+   return (
+     <section className={`page-hero ${theme === 'light' ? 'page-hero-light' : ''}`}>
+@@ -29,6 +33,7 @@ export function PageHero({
+         <Image src={image} alt="" fill priority sizes="100vw" />
+       ) : null}
+       <div className="page-hero-shade" />
++      {flourDust ? <FlourDust /> : null}
+       <div className="container page-hero-content">
+         <Reveal>
+           <p className={theme === 'light' ? 'eyebrow' : 'eyebrow light'}>

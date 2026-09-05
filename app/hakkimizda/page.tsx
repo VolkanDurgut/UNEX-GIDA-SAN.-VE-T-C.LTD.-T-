@@ -25,7 +25,7 @@ export default function AboutPage() {
           </>
         }
         text="Kalite, dinamizm ve profesyonellik ile dünyanın dört bir yanına ulaşan bir ortaklık."
-        image="/team-photo.jpg"
+        images={['/team-photo.jpg', '/about-facility.jpg', '/wheat-field-hand.jpg']}
         theme="light"
       />
 

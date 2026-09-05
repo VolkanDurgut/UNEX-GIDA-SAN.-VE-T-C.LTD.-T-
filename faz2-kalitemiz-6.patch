@@ -1,0 +1,202 @@
+diff --git a/app/globals.css b/app/globals.css
+index 221d363..9372610 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -348,8 +348,20 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ .product-list-section { background: #eeeae2; }
+ .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
+ 
+-.quality-copy-visual { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 56px; }
+-.quality-copy-visual img { filter: drop-shadow(10px 16px 14px rgba(18,23,32,.16)); }
++/* "İşinizi ileri taşırız" — iki çuvaldan dışa yayılan animasyonlu ok/ikon
++   kompozisyonu. Konum yüzdeleri SVG viewBox'ıyla (1000x320) birebir
++   eşleşiyor ki oklar ve ikon rozetleri tam hizalı kalsın. */
++.quality-bag-radial { position: relative; width: 100%; max-width: 980px; aspect-ratio: 1000 / 320; margin: 56px auto 0; }
++.quality-bag-radial-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
++.quality-bag-radial-bag { position: absolute; top: 50%; transform: translate(-50%, -50%); filter: drop-shadow(10px 16px 14px rgba(18,23,32,.16)); z-index: 2; }
++.quality-bag-radial-bag-left { left: 33%; }
++.quality-bag-radial-bag-right { left: 67%; }
++.quality-bag-radial-icon {
++  position: absolute; transform: translate(-50%, -50%); z-index: 2;
++  width: 42px; height: 42px; border-radius: 50%; background: #fff;
++  display: flex; align-items: center; justify-content: center;
++  box-shadow: 0 8px 18px rgba(0,0,0,.25); color: var(--navy);
++}
+ 
+ /* Kalitemiz — "İşinizi ileri taşırız" bölümünün lacivert + un tozu
+    varyasyonu (Hero'dan buraya taşındı). */
+@@ -358,7 +370,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ .quality-copy-navy .eyebrow { color: #fff; }
+ .quality-copy-navy .body-copy p { color: rgba(255,255,255,.78); }
+ .quality-copy-navy .quality-layout,
+-.quality-copy-navy .quality-copy-visual { position: relative; z-index: 2; }
++.quality-copy-navy .quality-bag-radial { position: relative; z-index: 2; }
+ 
+ .contact-section, .catalog-section, .related { background: var(--cream); }
+ .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; }
+diff --git a/app/kalitemiz/page.tsx b/app/kalitemiz/page.tsx
+index 0bdc272..54cb6ee 100644
+--- a/app/kalitemiz/page.tsx
++++ b/app/kalitemiz/page.tsx
+@@ -2,7 +2,7 @@ import Link from 'next/link';
+ import type { Metadata } from 'next';
+ import { ArrowRight, ShieldCheck } from 'lucide-react';
+ import { PageHero } from '@/components/page-hero';
+-import { FloatingBag } from '@/components/floating-bag';
++import { QualityBagRadial } from '@/components/quality-bag-radial';
+ import { FlourDust } from '@/components/flour-dust';
+ import { Reveal } from '@/components/motion-primitives';
+ 
+@@ -55,10 +55,7 @@ export default function QualityPage() {
+         </div>
+         <div className="container">
+           <Reveal delay={0.1}>
+-            <div className="quality-copy-visual">
+-              <FloatingBag src="/baker-flour.png" phase={0} />
+-              <FloatingBag src="/multi-purpose-flour.png" phase={0.5} />
+-            </div>
++            <QualityBagRadial />
+           </Reveal>
+         </div>
+       </section>
+diff --git a/components/floating-bag.tsx b/components/floating-bag.tsx
+deleted file mode 100644
+index 0c93fe5..0000000
+--- a/components/floating-bag.tsx
++++ /dev/null
+@@ -1,37 +0,0 @@
+-'use client';
+-
+-import Image from 'next/image';
+-import { motion } from 'framer-motion';
+-
+-/**
+- * Sürekli, yumuşak bir "yüzme" animasyonuyla dönen ürün paketi. `phase`
+- * (0-1) her paketin animasyon döngüsünde birbirinden farklı bir noktada
+- * başlamasını sağlar — bu "denklem" sayesinde paketler senkronize değil,
+- * organik/canlı bir ritimde hareket eder.
+- */
+-export function FloatingBag({
+-  src,
+-  width = 190,
+-  height = 250,
+-  phase = 0,
+-}: {
+-  src: string;
+-  width?: number;
+-  height?: number;
+-  phase?: number;
+-}) {
+-  return (
+-    <motion.div
+-      className="floating-bag"
+-      animate={{ y: [0, -10, 0, 6, 0] }}
+-      transition={{
+-        duration: 6,
+-        repeat: Infinity,
+-        ease: 'easeInOut',
+-        delay: phase * 6,
+-      }}
+-    >
+-      <Image src={src} alt="" width={width} height={height} />
+-    </motion.div>
+-  );
+-}
+diff --git a/components/quality-bag-radial.tsx b/components/quality-bag-radial.tsx
+new file mode 100644
+index 0000000..4af9016
+--- /dev/null
++++ b/components/quality-bag-radial.tsx
+@@ -0,0 +1,92 @@
++'use client';
++
++import { useRef } from 'react';
++import Image from 'next/image';
++import { motion, useInView } from 'framer-motion';
++import { Leaf, Search, Microscope, BarChart3, Handshake, Cpu } from 'lucide-react';
++
++const LEFT_BAG = '/baker-flour.png';
++const RIGHT_BAG = '/multi-purpose-flour.png';
++
++/** viewBox: 0 0 1000 320. Renkler koyu (lacivert) zemin üzerinde kontrast
++ *  için açık beyaz / altın olarak dönüşümlü seçildi. */
++const ARROWS = [
++  { x1: 300, y1: 150, x2: 112, y2: 58, color: 'light' },
++  { x1: 258, y1: 180, x2: 62, y2: 180, color: 'gold' },
++  { x1: 300, y1: 212, x2: 112, y2: 302, color: 'light' },
++  { x1: 700, y1: 150, x2: 888, y2: 58, color: 'gold' },
++  { x1: 742, y1: 180, x2: 938, y2: 180, color: 'light' },
++  { x1: 700, y1: 212, x2: 888, y2: 302, color: 'gold' },
++] as const;
++
++const ICONS = [
++  { x: 112, y: 58, Icon: Leaf },
++  { x: 62, y: 180, Icon: Search },
++  { x: 112, y: 302, Icon: Microscope },
++  { x: 888, y: 58, Icon: BarChart3 },
++  { x: 938, y: 180, Icon: Handshake },
++  { x: 888, y: 302, Icon: Cpu },
++] as const;
++
++const COLORS = { light: 'rgba(255,255,255,.85)', gold: '#e87c48' };
++
++/**
++ * "İşinizi ileri taşırız" bölümündeki iki un çuvalından dışa doğru yayılan,
++ * her biri lucide ikonlarıyla biten, gerçek zamanlı çizilen (pathLength
++ * animasyonu) ok demeti. Sahne görünüme girdiğinde bir kez oynar.
++ */
++export function QualityBagRadial() {
++  const ref = useRef<HTMLDivElement>(null);
++  const inView = useInView(ref, { once: true, amount: 0.4 });
++
++  return (
++    <div ref={ref} className="quality-bag-radial">
++      <svg viewBox="0 0 1000 320" className="quality-bag-radial-svg">
++        <defs>
++          <marker id="arrowhead-light" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
++            <path d="M0,0 L9,4.5 L0,9 Z" fill={COLORS.light} />
++          </marker>
++          <marker id="arrowhead-gold" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
++            <path d="M0,0 L9,4.5 L0,9 Z" fill={COLORS.gold} />
++          </marker>
++        </defs>
++        {ARROWS.map((a, i) => (
++          <motion.line
++            key={i}
++            x1={a.x1}
++            y1={a.y1}
++            x2={a.x2}
++            y2={a.y2}
++            stroke={COLORS[a.color]}
++            strokeWidth={3}
++            strokeLinecap="round"
++            markerEnd={`url(#arrowhead-${a.color})`}
++            initial={{ pathLength: 0, opacity: 0 }}
++            animate={inView ? { pathLength: 1, opacity: 1 } : {}}
++            transition={{ duration: 0.7, delay: 0.15 * i, ease: 'easeOut' }}
++          />
++        ))}
++      </svg>
++
++      <div className="quality-bag-radial-bag quality-bag-radial-bag-left">
++        <Image src={LEFT_BAG} alt="" width={170} height={225} />
++      </div>
++      <div className="quality-bag-radial-bag quality-bag-radial-bag-right">
++        <Image src={RIGHT_BAG} alt="" width={170} height={225} />
++      </div>
++
++      {ICONS.map(({ x, y, Icon }, i) => (
++        <motion.div
++          key={i}
++          className="quality-bag-radial-icon"
++          style={{ left: `${(x / 1000) * 100}%`, top: `${(y / 320) * 100}%` }}
++          initial={{ opacity: 0, scale: 0.5 }}
++          animate={inView ? { opacity: 1, scale: 1 } : {}}
++          transition={{ duration: 0.35, delay: 0.15 * i + 0.55 }}
++        >
++          <Icon size={19} />
++        </motion.div>
++      ))}
++    </div>
++  );
++}

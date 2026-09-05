@@ -1,0 +1,213 @@
+diff --git a/app/globals.css b/app/globals.css
+index a2fe100..c9f56f0 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -348,13 +348,22 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ .product-list-section { background: #eeeae2; }
+ .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
+ 
+-.quality-copy-visual { display: flex; align-items: center; justify-content: center; gap: 16px; }
+-.quality-copy-visual img { filter: drop-shadow(10px 16px 14px rgba(18,23,32,.16)); }
+-
+-/* Kalitemiz'in "İşinizi ileri taşırız" bölümü 3 sütuna çıkıyor (başlık |
+-   çuvallar | metin) — .about-grid'in 2 sütunlu düzenine dokunmadan,
+-   sadece .quality-layout için daha spesifik/sonraki bir kural. */
+-.quality-layout { grid-template-columns: .85fr .55fr 1.15fr; gap: 40px; }
++/* Kalitemiz — "İşinizi ileri taşırız" başlık/metin blokunun altına,
++   tam genişlikte gelen "flaş" animasyonlu 3 çuval vitrini. */
++.quality-bag-showcase { display: flex; align-items: center; justify-content: center; min-height: 280px; margin-top: 50px; }
++.quality-bag-flash-stage { position: relative; display: flex; align-items: center; justify-content: center; }
++.quality-bag-flash-overlay { position: absolute; inset: -50px; background: #fff; border-radius: 50%; filter: blur(24px); pointer-events: none; }
++.quality-bag-final-row { display: flex; gap: 24px; justify-content: center; }
++.quality-bag-final-row img,
++.quality-bag-flash-stage img { position: relative; filter: drop-shadow(10px 16px 14px rgba(18,23,32,.16)); }
++
++/* Kalitemiz'in alt bandı: paylaşılan .statement-band'in (beyaz) koyu
++   varyasyonu — sayfanın "lacivert / beyaz / lacivert" renk ritmini
++   tamamlar, footer'a (lacivert) da kesintisiz bağlanır. */
++.statement-band-dark { background: #07121c; color: #fff; border-top: none; position: relative; overflow: hidden; }
++.statement-band-dark .statement-inner { position: relative; z-index: 2; }
++.statement-band-dark .statement-inner h2 { color: #fff; }
++.statement-band-dark .statement-inner svg { color: var(--gold); }
+ 
+ .contact-section, .catalog-section, .related { background: var(--cream); }
+ .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; }
+diff --git a/app/hakkimizda/page.tsx b/app/hakkimizda/page.tsx
+index 50bdcff..e2dbe10 100644
+--- a/app/hakkimizda/page.tsx
++++ b/app/hakkimizda/page.tsx
+@@ -25,7 +25,7 @@ export default function AboutPage() {
+           </>
+         }
+         text="Kalite, dinamizm ve profesyonellik ile dünyanın dört bir yanına ulaşan bir ortaklık."
+-        images={['/team-photo.jpg', '/about-facility.jpg', '/wheat-field-hand.jpg']}
++        images={['/team-photo.jpg', '/wheat-field-hand.jpg']}
+         theme="light"
+       />
+ 
+diff --git a/app/kalitemiz/page.tsx b/app/kalitemiz/page.tsx
+index 4d79a6f..796c667 100644
+--- a/app/kalitemiz/page.tsx
++++ b/app/kalitemiz/page.tsx
+@@ -2,7 +2,8 @@ import Link from 'next/link';
+ import type { Metadata } from 'next';
+ import { ArrowRight, ShieldCheck } from 'lucide-react';
+ import { PageHero } from '@/components/page-hero';
+-import { FloatingBag } from '@/components/floating-bag';
++import { QualityBagShowcase } from '@/components/quality-bag-showcase';
++import { FlourDust } from '@/components/flour-dust';
+ import { Reveal } from '@/components/motion-primitives';
+ 
+ export const metadata: Metadata = {
+@@ -24,8 +25,7 @@ export default function QualityPage() {
+           </>
+         }
+         text="Bugünün ihtiyaçlarını anlayan, yarının pazarlarına hazırlanan bir üretim anlayışı."
+-        images={['/quality-lab.jpg', '/about-facility.jpg']}
+-        flourDust
++        image="/quality-lab.jpg"
+       />
+ 
+       <section className="section-padding quality-copy">
+@@ -40,12 +40,6 @@ export default function QualityPage() {
+               </h2>
+             </div>
+           </Reveal>
+-          <Reveal delay={0.05}>
+-            <div className="quality-copy-visual">
+-              <FloatingBag src="/baker-flour.png" phase={0} />
+-              <FloatingBag src="/multi-purpose-flour.png" phase={0.5} />
+-            </div>
+-          </Reveal>
+           <Reveal direction="right" delay={0.1}>
+             <div className="body-copy">
+               <p>
+@@ -60,9 +54,13 @@ export default function QualityPage() {
+             </div>
+           </Reveal>
+         </div>
++        <div className="container">
++          <QualityBagShowcase />
++        </div>
+       </section>
+ 
+-      <section className="statement-band">
++      <section className="statement-band statement-band-dark">
++        <FlourDust />
+         <Reveal className="container statement-inner">
+           <ShieldCheck size={25} />
+           <h2>
+diff --git a/components/floating-bag.tsx b/components/floating-bag.tsx
+deleted file mode 100644
+index 0c93fe5..0000000
+--- a/components/floating-bag.tsx
++++ /dev/null
+@@ -1,37 +0,0 @@
+-'use client';
+-
+-import Image from 'next/image';
+-import { motion } from 'framer-motion';
+-
+-/**
+- * Sürekli, yumuşak bir "yüzme" animasyonuyla dönen ürün paketi. `phase`
+- * (0-1) her paketin animasyon döngüsünde birbirinden farklı bir noktada
+- * başlamasını sağlar — bu "denklem" sayesinde paketler senkronize değil,
+- * organik/canlı bir ritimde hareket eder.
+- */
+-export function FloatingBag({
+-  src,
+-  width = 190,
+-  height = 250,
+-  phase = 0,
+-}: {
+-  src: string;
+-  width?: number;
+-  height?: number;
+-  phase?: number;
+-}) {
+-  return (
+-    <motion.div
+-      className="floating-bag"
+-      animate={{ y: [0, -10, 0, 6, 0] }}
+-      transition={{
+-        duration: 6,
+-        repeat: Infinity,
+-        ease: 'easeInOut',
+-        delay: phase * 6,
+-      }}
+-    >
+-      <Image src={src} alt="" width={width} height={height} />
+-    </motion.div>
+-  );
+-}
+diff --git a/components/quality-bag-showcase.tsx b/components/quality-bag-showcase.tsx
+new file mode 100644
+index 0000000..c06b161
+--- /dev/null
++++ b/components/quality-bag-showcase.tsx
+@@ -0,0 +1,65 @@
++'use client';
++
++import { useEffect, useRef, useState } from 'react';
++import Image from 'next/image';
++import { AnimatePresence, motion, useInView } from 'framer-motion';
++
++const BAGS = ['/baker-flour.png', '/multi-purpose-flour.png', '/biscuit-flour.png'];
++
++/**
++ * Sahne görüntüye girdiğinde: 3 un çuvalı sırayla, 2'şer saniyelik hızlı
++ * "flaş" kesmeleriyle tek tek belirir (bir kamera flaşı hissi). Üçü de
++ * gösterildikten sonra hoş bir geçişle hepsi birlikte, sakin bir sırada
++ * ekranda kalıcı olarak yerleşir. Bir kez oynar, tekrar etmez.
++ */
++export function QualityBagShowcase() {
++  const ref = useRef<HTMLDivElement>(null);
++  const inView = useInView(ref, { once: true, amount: 0.5 });
++  // -1: henüz başlamadı, 0..BAGS.length-1: o çuval flaşta, BAGS.length: final yerleşim
++  const [stage, setStage] = useState(-1);
++
++  useEffect(() => {
++    if (!inView) return;
++    const timers = BAGS.map((_, i) => setTimeout(() => setStage(i), i * 2000));
++    timers.push(setTimeout(() => setStage(BAGS.length), BAGS.length * 2000));
++    return () => timers.forEach(clearTimeout);
++  }, [inView]);
++
++  const isFinal = stage >= BAGS.length;
++
++  return (
++    <div ref={ref} className="quality-bag-showcase">
++      <AnimatePresence mode="wait">
++        {!isFinal && stage >= 0 && (
++          <motion.div key={`flash-${stage}`} className="quality-bag-flash-stage" exit={{ opacity: 0 }}>
++            <motion.div
++              className="quality-bag-flash-overlay"
++              initial={{ opacity: 0.85 }}
++              animate={{ opacity: 0 }}
++              transition={{ duration: 0.4 }}
++            />
++            <motion.div
++              initial={{ scale: 0.82, opacity: 0 }}
++              animate={{ scale: 1, opacity: 1 }}
++              transition={{ duration: 0.3 }}
++            >
++              <Image src={BAGS[stage]} alt="" width={190} height={250} />
++            </motion.div>
++          </motion.div>
++        )}
++      </AnimatePresence>
++      {isFinal && (
++        <motion.div
++          className="quality-bag-final-row"
++          initial={{ opacity: 0, y: 18 }}
++          animate={{ opacity: 1, y: 0 }}
++          transition={{ duration: 0.7, ease: 'easeOut' }}
++        >
++          {BAGS.map((src) => (
++            <Image key={src} src={src} alt="" width={170} height={225} />
++          ))}
++        </motion.div>
++      )}
++    </div>
++  );
++}

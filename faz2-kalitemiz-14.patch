@@ -1,0 +1,13 @@
+diff --git a/app/globals.css b/app/globals.css
+index 25d902d..eb7c4fc 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -418,7 +418,7 @@ input:focus, textarea:focus { border-color: var(--gold); }
+ 
+ /* ===== FOOTER ===== */
+ .footer { background: #07121c; color: #fff; padding: 78px 0 24px; position: relative; overflow: hidden; }
+-.footer-map-overlay { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 1; pointer-events: none; }
++.footer-map-overlay { position: absolute; inset: 0; mix-blend-mode: screen; opacity: .25; pointer-events: none; }
+ .footer-map-overlay img { object-fit: cover; object-position: center 40%; }
+ .footer .container { position: relative; z-index: 2; }
+ .footer-top { display: grid; grid-template-columns: 2fr .8fr 1.5fr 1fr; gap: 50px; padding-bottom: 70px; }
