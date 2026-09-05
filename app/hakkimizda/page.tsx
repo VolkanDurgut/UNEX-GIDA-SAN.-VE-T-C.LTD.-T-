@@ -25,7 +25,7 @@ export default function AboutPage() {
           </>
         }
         text="Kalite, dinamizm ve profesyonellik ile dünyanın dört bir yanına ulaşan bir ortaklık."
-        images={['/team-photo.jpg', '/about-facility.jpg', '/wheat-field-hand.jpg']}
+        image="/hakkimizda-hero.jpg"
         theme="light"
       />
 
@@ -62,6 +62,7 @@ export default function AboutPage() {
             <Reveal direction="right" delay={0.1}>
               <div className="about-video-frame">
                 <video src="/hakkimizda-tanitim.mp4" autoPlay loop muted playsInline />
+                <div className="about-video-fade" aria-hidden="true" />
               </div>
             </Reveal>
           </div>
