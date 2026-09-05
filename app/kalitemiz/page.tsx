@@ -8,7 +8,7 @@ import { Reveal } from '@/components/motion-primitives';
 export const metadata: Metadata = {
   title: 'Kalitemiz',
   description:
-    'Güvenilir tedarik zinciri, dünyanın önde gelen tarım emtiası ortaklarıyla çalışma ve kesintisiz destek — Unex Gıda kalite anlayışı.',
+    'Kalite kontrolden ürün güvenilirliğine — Unex Gıda\'nın buğday unu üretim standartları ve ortaklarımıza sunduğumuz kesintisiz destek.',
 };
 
 export default function QualityPage() {
