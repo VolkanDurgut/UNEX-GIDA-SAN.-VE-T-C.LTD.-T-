@@ -1,5 +1,3 @@
-'use client';
-
 import { Download, FileText, HardDrive, Globe2 } from 'lucide-react';
 import { Reveal } from './motion-primitives';
 import { CatalogCardCarousel } from './catalog-card-carousel';
