@@ -338,6 +338,15 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .about-navy-content { padding: 90px 0 56px; position: relative; z-index: 2; }
 .about-navy-block > .stats { position: relative; z-index: 2; }
 
+/* Hakkımızda — "Birlikte büyüyen" başlığı artık üstte, tam genişlikte
+   ortalanmış; altında metin + çerçevesiz video yan yana. */
+.about-heading-centered { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+.about-video-frame {
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at center, #000 38%, transparent 92%);
+  mask-image: radial-gradient(ellipse 90% 90% at center, #000 38%, transparent 92%);
+}
+.about-video-frame video { display: block; width: 100%; height: auto; }
+
 .stats { padding: 0 0 90px; }
 .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .stat { padding-left: 28px; border-left: 1px solid rgba(255,255,255,.18); display: flex; flex-direction: column; gap: 12px; }
