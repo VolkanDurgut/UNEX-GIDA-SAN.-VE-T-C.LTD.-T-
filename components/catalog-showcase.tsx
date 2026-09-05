@@ -1,31 +1,20 @@
 'use client';
 
-import Image from 'next/image';
 import { Download, FileText, HardDrive, Globe2 } from 'lucide-react';
 import { Reveal } from './motion-primitives';
+import { CatalogCardCarousel } from './catalog-card-carousel';
 
 /**
  * Katalog sayfasının "İndirme Merkezi" bölümü: kataloğun kendi gerçek
- * sayfalarından oluşan bir önizleme yığını (kapak + ürün portföyü +
- * sertifikalar) ile birlikte, gerçek indirme linkine sahip zengin bir
- * bilgi paneli. İcat edilmiş süs görseli değil, gerçek içerik.
+ * 4 sayfasından oluşan, kademeli ve hafif sağa yatık, "havada asılı"
+ * hissi veren bir kompozisyon (lojistik, buğday tecrübesi, ürün
+ * portföyü, sertifikalar) — kartlar döngüsel olarak yer değiştiriyor —
+ * ile birlikte, gerçek indirme linkine sahip zengin bir bilgi paneli.
  */
 export function CatalogShowcase() {
   return (
     <div className="catalog-showcase">
-      <Reveal direction="left">
-        <div className="catalog-stack">
-          <div className="stack-page stack-page-3">
-            <Image src="/katalog-sayfa-sertifika.jpg" alt="" width={900} height={636} />
-          </div>
-          <div className="stack-page stack-page-2">
-            <Image src="/katalog-sayfa-urunler.jpg" alt="" width={900} height={636} />
-          </div>
-          <div className="stack-page stack-page-1">
-            <video src="/katalog-tanitim.mp4" poster="/katalog-kapak.jpg" autoPlay loop muted playsInline />
-          </div>
-        </div>
-      </Reveal>
+      <CatalogCardCarousel />
       <Reveal direction="right" delay={0.1}>
         <div className="catalog-info">
           <p className="eyebrow">İNDİRME MERKEZİ</p>
