@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ArrowUpRight, ShieldCheck } from 'lucide-react';
-import { suppliers } from '@/lib/data';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { PageHero } from '@/components/page-hero';
-import { Reveal, RevealGroup, RevealItem } from '@/components/motion-primitives';
+import { QualityProductShowcase } from '@/components/quality-product-showcase';
+import { Reveal } from '@/components/motion-primitives';
 
 export const metadata: Metadata = {
   title: 'Kalitemiz',
@@ -24,6 +24,8 @@ export default function QualityPage() {
           </>
         }
         text="Bugünün ihtiyaçlarını anlayan, yarının pazarlarına hazırlanan bir üretim anlayışı."
+        image="/quality-lab.jpg"
+        overlayImage="/export-network-map.jpg"
       />
 
       <section className="section-padding quality-copy">
@@ -32,9 +34,7 @@ export default function QualityPage() {
             <div>
               <p className="eyebrow">ORTAKLIK VE DESTEK</p>
               <h2>
-                İşinizi
-                <br />
-                <em>ileri taşırız.</em>
+                İşinizi <em>ileri taşırız.</em>
               </h2>
             </div>
           </Reveal>
@@ -52,32 +52,23 @@ export default function QualityPage() {
             </div>
           </Reveal>
         </div>
-      </section>
-
-      <section className="supplier-band">
         <div className="container">
-          <Reveal>
-            <p className="eyebrow">GÜVENİLİR İŞ ORTAKLARI</p>
+          <Reveal delay={0.1}>
+            <QualityProductShowcase />
           </Reveal>
-          <RevealGroup className="supplier-list">
-            {suppliers.map((supplier) => (
-              <RevealItem key={supplier}>
-                <span>{supplier}</span>
-              </RevealItem>
-            ))}
-          </RevealGroup>
         </div>
       </section>
 
-      <section className="quality-bottom">
-        <Reveal className="container quality-bottom-inner">
-          <ShieldCheck size={32} />
-          <div>
-            <h3>Güvenilir tedarik. Kesintisiz destek.</h3>
-            <p>Dünya tahıl piyasasını yakından takip ediyor, ortaklarımızın risklerini azaltan iş planları sunuyoruz.</p>
-          </div>
-          <Link href="/iletisim" className="text-link">
-            Birlikte çalışalım <ArrowUpRight size={17} />
+      <section className="statement-band">
+        <Reveal className="container statement-inner">
+          <ShieldCheck size={25} />
+          <h2>
+            Güvenilir tedarik.
+            <br />
+            <em>Kesintisiz destek.</em>
+          </h2>
+          <Link href="/iletisim" className="button button-gold">
+            Birlikte Çalışalım <ArrowRight size={17} />
           </Link>
         </Reveal>
       </section>
