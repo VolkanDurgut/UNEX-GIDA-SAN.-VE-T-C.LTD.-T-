@@ -345,6 +345,28 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .cta-block h2 em { color: #f4ad87; }
 
 .product-list-section { background: #eeeae2; }
+
+/* Kalitemiz — Hijyen & Gıda Güvenliği: footer ile birebir aynı lacivert
+   zemin (#07121c) + un tozu. */
+.quality-navy-block { position: relative; overflow: hidden; background: #07121c; color: #fff; }
+.quality-navy-block h2 { color: #fff; }
+.quality-navy-block .body-copy p { color: rgba(255,255,255,.78); }
+.quality-navy-block .section-padding { position: relative; z-index: 2; }
+
+.hygiene-photo { border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+.hygiene-photo img { display: block; width: 100%; height: auto; }
+
+.hygiene-list { display: flex; flex-wrap: wrap; gap: 20px 40px; margin-top: 56px; }
+.hygiene-item { display: flex; align-items: center; gap: 12px; flex: 1 1 220px; }
+.hygiene-item svg { color: var(--gold); flex-shrink: 0; }
+.hygiene-item span { font-size: 15px; color: rgba(255,255,255,.78); }
+
+/* Kalitemiz — "Güvenilir tedarik" bandına eklenen sertifika şeridi: rozet
+   görselinin zemini zaten beyaz olduğu için burada şeffaflığa gerek yok. */
+.statement-certs { border-top: 1px solid #eeeae2; padding: 44px 0 8px; }
+.cert-badges-image { margin: 20px 0 22px; max-width: 620px; }
+.cert-badges-image img { display: block; width: 100%; height: auto; }
+.cert-note { max-width: 560px; font-size: 14px; color: var(--soft); line-height: 1.6; }
 .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
 
 /* "İşinizi ileri taşırız" — ihracat ağı görseli (gerçek fotoğraf, beyaz
