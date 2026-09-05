@@ -366,7 +366,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 
 /* Kalitemiz — "Güvenilir tedarik" bandına eklenen sertifika şeridi: rozet
    görselinin zemini zaten beyaz olduğu için burada şeffaflığa gerek yok. */
-.statement-certs { border-top: 1px solid #eeeae2; padding: 44px 0 8px; text-align: center; }
+.statement-certs { border-top: 1px solid #eeeae2; padding: 64px 0; text-align: center; }
 .cert-badges-image { margin: 20px auto 22px; max-width: 620px; }
 .cert-badges-image img { display: block; width: 100%; height: auto; }
 .cert-note { max-width: 560px; margin: 0 auto; font-size: 14px; color: var(--soft); line-height: 1.6; }
