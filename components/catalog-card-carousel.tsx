@@ -12,20 +12,22 @@ const IMAGES = [
 ];
 
 /** Masaüstü yuvaları: en öndeki (0) en üstte/solda, sona doğru kademeli
- *  olarak sağa/aşağıya kayıyor. */
+ *  olarak sağa/aşağıya kayıyor. `x`/`y` kullanıyoruz (top/left değil) —
+ *  bunlar `transform` üzerinden GPU tarafından hızlandırılır, tarayıcıya
+ *  her karede layout yeniden hesaplattırmaz (reflow yok, akıcı animasyon). */
 const SLOTS_DESKTOP = [
-  { top: 0, left: 0, rotate: 3, zIndex: 4 },
-  { top: 58, left: 65, rotate: 4, zIndex: 3 },
-  { top: 116, left: 130, rotate: 5, zIndex: 2 },
-  { top: 174, left: 195, rotate: 6, zIndex: 1 },
+  { x: 0, y: 0, rotate: 3, zIndex: 4 },
+  { x: 65, y: 58, rotate: 4, zIndex: 3 },
+  { x: 130, y: 116, rotate: 5, zIndex: 2 },
+  { x: 195, y: 174, rotate: 6, zIndex: 1 },
 ];
 
 /** Küçük ekranlarda kart boyutu düştüğü için aralıklar orantılı küçültülür. */
 const SLOTS_COMPACT = [
-  { top: 0, left: 0, rotate: 3, zIndex: 4 },
-  { top: 35, left: 38, rotate: 4, zIndex: 3 },
-  { top: 70, left: 76, rotate: 5, zIndex: 2 },
-  { top: 105, left: 114, rotate: 6, zIndex: 1 },
+  { x: 0, y: 0, rotate: 3, zIndex: 4 },
+  { x: 38, y: 35, rotate: 4, zIndex: 3 },
+  { x: 76, y: 70, rotate: 5, zIndex: 2 },
+  { x: 114, y: 105, rotate: 6, zIndex: 1 },
 ];
 
 /**
@@ -65,7 +67,7 @@ export function CatalogCardCarousel() {
           <motion.div
             key={src}
             className="catalog-page-card"
-            animate={{ top: slot.top, left: slot.left, rotate: slot.rotate, zIndex: slot.zIndex }}
+            animate={{ x: slot.x, y: slot.y, rotate: slot.rotate, zIndex: slot.zIndex }}
             transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
           >
             <Image src={src} alt="" width={900} height={636} />
