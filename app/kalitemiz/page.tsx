@@ -112,6 +112,7 @@ export default function QualityPage() {
                   width={1000}
                   height={641}
                 />
+                <div className="hygiene-photo-fade" aria-hidden="true" />
               </div>
             </Reveal>
           </div>

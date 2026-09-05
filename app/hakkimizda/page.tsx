@@ -61,7 +61,7 @@ export default function AboutPage() {
             </Reveal>
             <Reveal direction="right" delay={0.1}>
               <div className="about-video-frame">
-                <video src="/hakkimizda-tanitim.mp4" autoPlay loop muted playsInline />
+                <video src="/hakkimizda-tanitim.mp4" autoPlay loop muted playsInline aria-hidden="true" />
                 <div className="about-video-fade" aria-hidden="true" />
               </div>
             </Reveal>
