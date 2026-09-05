@@ -32,9 +32,9 @@ export default function AboutPage() {
       <section className="about-navy-block">
         <FlourDust />
         <div className="about-navy-content">
-          <div className="container about-grid">
-            <Reveal direction="left">
-              <div>
+          <div className="container">
+            <Reveal>
+              <div className="about-heading-centered">
                 <p className="eyebrow">UNEX HAKKINDA</p>
                 <h2>
                   Birlikte büyüyen
@@ -43,7 +43,9 @@ export default function AboutPage() {
                 </h2>
               </div>
             </Reveal>
-            <Reveal direction="right" delay={0.1}>
+          </div>
+          <div className="container about-grid">
+            <Reveal direction="left">
               <div className="body-copy">
                 <p>
                   Uluslararası buğday unu ve emtia piyasasında 30 yılı aşkın tecrübemizle 1.000.000 tonun üzerinde
@@ -55,6 +57,11 @@ export default function AboutPage() {
                   dünyanın her köşesinden müşterilerimize ulaştırmanın gururunu yaşıyoruz. Müşterilerimize
                   uzmanlığımızı ve deneyimimizi sunarak onlarla stratejik bir ortak olmaya çalışıyoruz.
                 </p>
+              </div>
+            </Reveal>
+            <Reveal direction="right" delay={0.1}>
+              <div className="about-video-frame">
+                <video src="/hakkimizda-tanitim.mp4" autoPlay loop muted playsInline />
               </div>
             </Reveal>
           </div>
