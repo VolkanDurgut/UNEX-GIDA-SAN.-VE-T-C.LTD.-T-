@@ -1,0 +1,190 @@
+diff --git a/app/globals.css b/app/globals.css
+index d635c94..f393b33 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -346,15 +346,20 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+ 
+ .product-list-section { background: #eeeae2; }
+ 
+-/* Kalitemiz — Hijyen & Gıda Güvenliği: sağ sütun, ikonlu liste. */
+-.quality-hygiene { background: #fff; }
++/* Kalitemiz — Hijyen & Gıda Güvenliği + Sertifikalar: footer ile birebir
++   aynı lacivert zemin (#07121c) + un tozu, tek bir blokta birleşik. */
++.quality-navy-block { position: relative; overflow: hidden; background: #07121c; color: #fff; }
++.quality-navy-block h2 { color: #fff; }
++.quality-navy-block .body-copy p { color: rgba(255,255,255,.78); }
++.quality-navy-block .section-padding,
++.quality-navy-block .certifications-inner { position: relative; z-index: 2; }
++
+ .hygiene-list { display: flex; flex-direction: column; gap: 22px; align-self: center; }
+ .hygiene-item { display: flex; align-items: center; gap: 14px; }
+ .hygiene-item svg { color: var(--gold); flex-shrink: 0; }
+-.hygiene-item span { font-size: 15px; color: var(--gray); }
++.hygiene-item span { font-size: 15px; color: rgba(255,255,255,.78); }
+ 
+-/* Kalitemiz — Sertifikalar: açık bej şerit, rozet çipleri. */
+-.certifications-band { background: #eeeae2; padding: 64px 0; }
++.certifications-inner { padding: 24px 0 88px; }
+ .cert-badges { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0 22px; }
+ .cert-badge {
+   display: inline-flex; align-items: center; gap: 8px; background: #fff;
+@@ -362,7 +367,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
+   font-size: 13px; font-weight: 600; color: var(--navy);
+ }
+ .cert-badge svg { color: var(--gold); }
+-.cert-note { max-width: 560px; font-size: 14px; color: var(--soft); line-height: 1.6; }
++.cert-note { max-width: 560px; font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.6; }
+ .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
+ 
+ /* "İşinizi ileri taşırız" — ihracat ağı görseli (gerçek fotoğraf, beyaz
+diff --git a/app/kalitemiz/page.tsx b/app/kalitemiz/page.tsx
+index 8f9e018..cc99f03 100644
+--- a/app/kalitemiz/page.tsx
++++ b/app/kalitemiz/page.tsx
+@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
+ import { ArrowRight, ShieldCheck, ClipboardCheck, Users, SprayCan, Wrench, BadgeCheck } from 'lucide-react';
+ import { PageHero } from '@/components/page-hero';
+ import { QualityProductShowcase } from '@/components/quality-product-showcase';
++import { FlourDust } from '@/components/flour-dust';
+ import { Reveal, RevealGroup, RevealItem } from '@/components/motion-primitives';
+ 
+ export const metadata: Metadata = {
+@@ -59,72 +60,75 @@ export default function QualityPage() {
+         </div>
+       </section>
+ 
+-      <section className="section-padding quality-hygiene">
+-        <div className="container quality-layout">
+-          <Reveal direction="left">
+-            <div>
+-              <p className="eyebrow">HİJYEN VE GIDA GÜVENLİĞİ</p>
+-              <h2>
+-                Temiz üretim, <em>güvenli sonuç.</em>
+-              </h2>
+-              <div className="body-copy">
+-                <p>
+-                  Gıda güvenliği ve hijyen, üretim felsefemizin merkezinde yer alır. Tesisimiz, sürecin her
+-                  aşamasında sıkı kontrollerle uluslararası gıda güvenliği standartlarına uygun olarak faaliyet
+-                  göstermektedir.
+-                </p>
++      <section className="quality-navy-block">
++        <FlourDust />
++        <div className="section-padding quality-hygiene">
++          <div className="container quality-layout">
++            <Reveal direction="left">
++              <div>
++                <p className="eyebrow">HİJYEN VE GIDA GÜVENLİĞİ</p>
++                <h2>
++                  Temiz üretim, <em>güvenli sonuç.</em>
++                </h2>
++                <div className="body-copy">
++                  <p>
++                    Gıda güvenliği ve hijyen, üretim felsefemizin merkezinde yer alır. Tesisimiz, sürecin her
++                    aşamasında sıkı kontrollerle uluslararası gıda güvenliği standartlarına uygun olarak faaliyet
++                    göstermektedir.
++                  </p>
++                </div>
+               </div>
+-            </div>
+-          </Reveal>
+-          <RevealGroup className="hygiene-list">
+-            <RevealItem direction="right" className="hygiene-item">
+-              <ClipboardCheck size={20} />
+-              <span>Kontrollü hijyen bölgeleri</span>
+-            </RevealItem>
+-            <RevealItem direction="right" className="hygiene-item">
+-              <Users size={20} />
+-              <span>Personel hijyen protokolleri</span>
+-            </RevealItem>
+-            <RevealItem direction="right" className="hygiene-item">
+-              <SprayCan size={20} />
+-              <span>Sürekli sanitasyon uygulamaları</span>
+-            </RevealItem>
+-            <RevealItem direction="right" className="hygiene-item">
+-              <Wrench size={20} />
+-              <span>Önleyici bakım programları</span>
+-            </RevealItem>
+-          </RevealGroup>
++            </Reveal>
++            <RevealGroup className="hygiene-list">
++              <RevealItem direction="right" className="hygiene-item">
++                <ClipboardCheck size={20} />
++                <span>Kontrollü hijyen bölgeleri</span>
++              </RevealItem>
++              <RevealItem direction="right" className="hygiene-item">
++                <Users size={20} />
++                <span>Personel hijyen protokolleri</span>
++              </RevealItem>
++              <RevealItem direction="right" className="hygiene-item">
++                <SprayCan size={20} />
++                <span>Sürekli sanitasyon uygulamaları</span>
++              </RevealItem>
++              <RevealItem direction="right" className="hygiene-item">
++                <Wrench size={20} />
++                <span>Önleyici bakım programları</span>
++              </RevealItem>
++            </RevealGroup>
++          </div>
+         </div>
+-      </section>
+ 
+-      <section className="certifications-band">
+-        <div className="container">
+-          <Reveal>
+-            <p className="eyebrow">SERTİFİKALAR</p>
+-          </Reveal>
+-          <RevealGroup className="cert-badges">
+-            <RevealItem className="cert-badge">
+-              <BadgeCheck size={18} /> ISO 9001
+-            </RevealItem>
+-            <RevealItem className="cert-badge">
+-              <BadgeCheck size={18} /> ISO 10002
+-            </RevealItem>
+-            <RevealItem className="cert-badge">
+-              <BadgeCheck size={18} /> ISO 14001
+-            </RevealItem>
+-            <RevealItem className="cert-badge">
+-              <BadgeCheck size={18} /> ISO 22000
+-            </RevealItem>
+-            <RevealItem className="cert-badge">
+-              <BadgeCheck size={18} /> Helal Gıda Sertifikalı
+-            </RevealItem>
+-          </RevealGroup>
+-          <Reveal delay={0.1}>
+-            <p className="cert-note">
+-              Bu sertifikalar; gıda güvenliğine, izlenebilirliğe ve sürekli iyileştirmeye olan bağlılığımızı
+-              yansıtmaktadır.
+-            </p>
+-          </Reveal>
++        <div className="certifications-inner">
++          <div className="container">
++            <Reveal>
++              <p className="eyebrow">SERTİFİKALAR</p>
++            </Reveal>
++            <RevealGroup className="cert-badges">
++              <RevealItem className="cert-badge">
++                <BadgeCheck size={18} /> ISO 9001
++              </RevealItem>
++              <RevealItem className="cert-badge">
++                <BadgeCheck size={18} /> ISO 10002
++              </RevealItem>
++              <RevealItem className="cert-badge">
++                <BadgeCheck size={18} /> ISO 14001
++              </RevealItem>
++              <RevealItem className="cert-badge">
++                <BadgeCheck size={18} /> ISO 22000
++              </RevealItem>
++              <RevealItem className="cert-badge">
++                <BadgeCheck size={18} /> Helal Gıda Sertifikalı
++              </RevealItem>
++            </RevealGroup>
++            <Reveal delay={0.1}>
++              <p className="cert-note">
++                Bu sertifikalar; gıda güvenliğine, izlenebilirliğe ve sürekli iyileştirmeye olan bağlılığımızı
++                yansıtmaktadır.
++              </p>
++            </Reveal>
++          </div>
+         </div>
+       </section>
+ 

@@ -1,0 +1,87 @@
+diff --git a/app/kalitemiz/page.tsx b/app/kalitemiz/page.tsx
+index d3ab5b4..8f9e018 100644
+--- a/app/kalitemiz/page.tsx
++++ b/app/kalitemiz/page.tsx
+@@ -28,6 +28,37 @@ export default function QualityPage() {
+         overlayImage="/export-network-map.jpg"
+       />
+ 
++      <section className="section-padding quality-copy">
++        <div className="container quality-layout">
++          <Reveal direction="left">
++            <div>
++              <p className="eyebrow">ORTAKLIK VE DESTEK</p>
++              <h2>
++                İşinizi <em>ileri taşırız.</em>
++              </h2>
++            </div>
++          </Reveal>
++          <Reveal direction="right" delay={0.1}>
++            <div className="body-copy">
++              <p>
++                Başarımızın anahtarı ve her zaman korumaya çalıştığımız değer, ortaklarımızla oluşturduğumuz
++                güvendir. Hem tedarikçi hem de alıcı tarafta yer alan bir firma olarak emtia piyasalarında
++                zamanlamanın ve iş pozisyonları almanın önemini çok iyi biliyoruz.
++              </p>
++              <p>
++                Sadece yüksek kaliteli buğday unlarımızı değil, ortaklarımıza kendi alanlarında rekabetçi
++                olmaları için gerekli araçları sağlamanın da sorumluluğunu her zaman hissediyoruz.
++              </p>
++            </div>
++          </Reveal>
++        </div>
++        <div className="container">
++          <Reveal delay={0.1}>
++            <QualityProductShowcase />
++          </Reveal>
++        </div>
++      </section>
++
+       <section className="section-padding quality-hygiene">
+         <div className="container quality-layout">
+           <Reveal direction="left">
+@@ -97,37 +128,6 @@ export default function QualityPage() {
+         </div>
+       </section>
+ 
+-      <section className="section-padding quality-copy">
+-        <div className="container quality-layout">
+-          <Reveal direction="left">
+-            <div>
+-              <p className="eyebrow">ORTAKLIK VE DESTEK</p>
+-              <h2>
+-                İşinizi <em>ileri taşırız.</em>
+-              </h2>
+-            </div>
+-          </Reveal>
+-          <Reveal direction="right" delay={0.1}>
+-            <div className="body-copy">
+-              <p>
+-                Başarımızın anahtarı ve her zaman korumaya çalıştığımız değer, ortaklarımızla oluşturduğumuz
+-                güvendir. Hem tedarikçi hem de alıcı tarafta yer alan bir firma olarak emtia piyasalarında
+-                zamanlamanın ve iş pozisyonları almanın önemini çok iyi biliyoruz.
+-              </p>
+-              <p>
+-                Sadece yüksek kaliteli buğday unlarımızı değil, ortaklarımıza kendi alanlarında rekabetçi
+-                olmaları için gerekli araçları sağlamanın da sorumluluğunu her zaman hissediyoruz.
+-              </p>
+-            </div>
+-          </Reveal>
+-        </div>
+-        <div className="container">
+-          <Reveal delay={0.1}>
+-            <QualityProductShowcase />
+-          </Reveal>
+-        </div>
+-      </section>
+-
+       <section className="statement-band">
+         <Reveal className="container statement-inner">
+           <ShieldCheck size={25} />
+@@ -143,4 +143,4 @@ export default function QualityPage() {
+       </section>
+     </main>
+   );
+-}
+\ No newline at end of file
++}

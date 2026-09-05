@@ -55,19 +55,19 @@ export function Together() {
               src="/baker-flour.png"
               alt="Baker Flour"
               style={{ left: '0%', bottom: 0, height: '82%', zIndex: 3 }}
-              delay={0.15}
+              delay={0.1}
             />
             <SettleItem
               src="/multi-purpose-flour.png"
               alt="Multi-Purpose Flour"
               style={{ left: '36%', bottom: 0, height: '56%', zIndex: 4 }}
-              delay={0.3}
+              delay={0.2}
             />
           </motion.div>
         </Reveal>
 
         <div className="together-copy">
-          <Reveal delay={0.15}>
+          <Reveal delay={0.1}>
             <p className="eyebrow light">
               <span /> SÖZÜMÜZ
             </p>
