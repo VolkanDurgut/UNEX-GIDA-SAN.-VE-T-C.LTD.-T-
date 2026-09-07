@@ -26,8 +26,7 @@ export default function QualityPage() {
           </>
         }
         text="Bugünün ihtiyaçlarını anlayan, yarının pazarlarına hazırlanan bir üretim anlayışı."
-        image="/quality-lab.jpg"
-        overlayImage="/export-network-map.jpg"
+        images={['/kalitemiz-otomasyon.jpg', '/quality-lab.jpg']}
       />
 
       <section className="section-padding quality-copy">
