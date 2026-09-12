@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
+import { EASE } from '@/lib/motion';
 
 const IMAGES = [
   '/katalog-sayfa-lojistik.jpg',
@@ -68,7 +69,7 @@ export function CatalogCardCarousel() {
             key={src}
             className="catalog-page-card"
             animate={{ x: slot.x, y: slot.y, rotate: slot.rotate, zIndex: slot.zIndex }}
-            transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.9, ease: EASE }}
           >
             <Image src={src} alt="" width={900} height={636} />
           </motion.div>

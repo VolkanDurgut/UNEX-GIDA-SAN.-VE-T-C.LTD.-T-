@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { EASE } from '@/lib/motion';
 
 const navItems = [
   { href: '/', label: 'Anasayfa' },
@@ -37,7 +38,7 @@ export function Header() {
       className={`header ${transparent ? 'header-transparent' : ''}`}
       initial={{ y: -90, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: EASE }}
     >
       <div className="container header-inner">
         <Link href="/" className="brand" aria-label="Unex ana sayfa">
