@@ -15,7 +15,12 @@ function Counter({ value }: { value: number }) {
 
   useEffect(() => {
     if (inView) {
-      const controls = animate(count, value, { duration: 1.4, ease: 'easeOut' });
+      // Sabit süreli 'easeOut' eğrisi yerine gerçek bir kütle-yay-sönüm
+      // (mass-spring-damper) simülasyonu: stiffness/damping oranı tam
+      // "kritik sönüm" noktasında (damping = 2·√(stiffness·mass)) — sayı
+      // hedefi AŞMADAN (geri sayıma düşmeden), ama sabit bir eğriden daha
+      // "fiziksel" ve organik hissettiren bir ivmeyle yerine oturuyor.
+      const controls = animate(count, value, { type: 'spring', stiffness: 90, damping: 19, mass: 1 });
       return () => controls.stop();
     }
   }, [inView, value, count]);
