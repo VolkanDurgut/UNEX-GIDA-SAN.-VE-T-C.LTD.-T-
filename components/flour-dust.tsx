@@ -12,14 +12,34 @@ type Particle = {
 };
 
 function makeParticles(count: number): Particle[] {
-  return Array.from({ length: count }, () => ({
-    left: Math.random() * 100,
-    size: 3 + Math.random() * 7,
-    duration: 9 + Math.random() * 10,
-    delay: -Math.random() * 18,
-    drift: (Math.random() - 0.5) * 60,
-    opacity: 0.25 + Math.random() * 0.45,
-  }));
+  return Array.from({ length: count }, () => {
+    // Ağırlıklı (power-distribution) rastgelelik: Math.random() düz/tekdüze
+    // bir dağılım verir (her değer eşit olası). Gerçek un tozunda ise
+    // parçacıkların çoğu küçük ve hafiftir, büyük/belirgin olanlar azdır.
+    // Üssü (2.2) alarak 0'a yakın değerleri çok daha olası hale getiriyoruz —
+    // bu da "çoğu küçük, nadiren büyük" dağılımını üretir.
+    const sizeT = Math.pow(Math.random(), 2.2);
+    const size = 2.5 + sizeT * 8.5;
+
+    // Küçük/hafif parçacıklar havada daha uzun süzülür (düşük terminal hız),
+    // büyük parçacıklar daha hızlı düşer — gerçek toz fiziğindeki
+    // boyut/düşüş hızı ilişkisine benzer şekilde `size` ile ilişkilendirildi.
+    const duration = 8 + (1 - sizeT) * 14;
+
+    return {
+      left: Math.random() * 100,
+      size,
+      duration,
+      // Gecikme, artık kendi döngü süresiyle orantılı — böylece hem kısa
+      // hem uzun süreli parçacıklar sahneye eşit dağılımla, rastgele
+      // fazlarda giriyor (önceden sabit bir aralıktan bağımsız seçiliyordu).
+      delay: -Math.random() * duration,
+      drift: (Math.random() - 0.5) * 60,
+      // Büyük parçacıklar daha belirgin (yüksek opaklık) görünür — küçükler
+      // ince, sisli bir arka plan dokusu oluşturur.
+      opacity: 0.2 + sizeT * 0.5,
+    };
+  });
 }
 
 export function FlourDust() {
