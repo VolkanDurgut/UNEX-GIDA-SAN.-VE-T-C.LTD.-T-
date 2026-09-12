@@ -165,8 +165,6 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .button:hover { filter: brightness(1.06); }
 .button-gold { background: var(--gold); color: #fff; box-shadow: 0 10px 22px rgba(232,124,72,.2); }
 .button-gold:hover { background: var(--gold-hover); box-shadow: 0 14px 28px rgba(232,124,72,.3); }
-.button-outline { border: 1px solid rgba(255,255,255,.55); color: #fff; }
-.button-outline:hover { background: #fff; color: var(--navy); }
 .hero-scroll { position: absolute; right: 32px; bottom: 32px; display: flex; align-items: center; gap: 15px; color: rgba(255,255,255,.55); font-size: 9px; letter-spacing: .2em; transform: rotate(-90deg); transform-origin: right; }
 .hero-scroll div { height: 1px; width: 65px; background: var(--gold); }
 
@@ -249,12 +247,6 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .product-use { color: var(--gold); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 7px; }
 .product-card-info svg { color: var(--gold); transition: transform .2s; }
 .product-card:hover .product-card-info svg { transform: translate(3px, -3px); }
-.strip-controls { display: flex; justify-content: space-between; color: var(--soft); font-size: 10px; margin-top: 23px; }
-.strip-controls div { display: flex; gap: 4px; }
-.strip-controls button { border: 1px solid #c7c2b9; width: 33px; height: 33px; display: grid; place-items: center; }
-.strip-controls button:hover { border-color: var(--gold); color: var(--gold); }
-.strip-controls button:disabled { opacity: .35; cursor: default; }
-.strip-controls button:disabled:hover { border-color: #c7c2b9; color: var(--soft); }
 .product-strip { position: relative; overflow: hidden; }
 .product-strip-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
@@ -282,9 +274,6 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 }
 .page-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; filter: saturate(.85); }
 .page-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; filter: saturate(.85); }
-.hero-slideshow { position: absolute; inset: 0; overflow: hidden; }
-.hero-slideshow-frame { position: absolute; inset: 0; }
-.hero-slideshow-frame img { object-fit: cover; object-position: center 45%; filter: saturate(.85); }
 .hero-showcase { position: absolute; inset: 0; overflow: hidden; }
 .hero-showcase-frame { position: absolute; inset: 0; }
 .hero-showcase-frame img { object-fit: cover; object-position: center 45%; filter: saturate(.85); }
@@ -305,26 +294,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
   background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.92) 22%, rgba(255,255,255,.45) 38%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 60%);
 }
 .page-hero-light > img { object-position: center 58%; }
-.page-hero-light .hero-slideshow-frame img { object-position: center 55%; }
 
-/* ===== İHRACAT HARİTASI (Hakkımızda Hero'su) =====
-   Görsel alanı sadece sağ ~62%'de tutuyoruz ki soldaki metinle çakışmasın;
-   .page-hero-shade zaten soldan beyaza yumuşatıyor. */
-.page-hero-visual { position: absolute; top: 0; right: 0; bottom: 0; width: 62%; overflow: hidden; }
-.export-dot { fill: var(--gold); }
-.export-dot-ping {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: .6;
-  opacity: .7;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: export-ping 2.6s ease-out infinite;
-}
-@keyframes export-ping {
-  0% { r: 1.6; opacity: .7; }
-  100% { r: 6.5; opacity: 0; }
-}
 .page-hero-light h1 { color: var(--navy); }
 .page-hero-light .page-hero-content > p:last-child { color: rgba(34,48,87,.72); }
 
@@ -365,11 +335,6 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
 .stat-value strong { font-family: 'Poppins', sans-serif; font-size: 56px; line-height: 1; color: #fff; letter-spacing: -.03em; }
 .stat-suffix { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 600; color: var(--gold); }
 .stat-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); }
-
-.cta-block { background: linear-gradient(135deg, var(--navy), #16223f); position: relative; color: #fff; padding: 105px 0; }
-.cta-block .container { position: relative; }
-.cta-block h2 { font-size: clamp(48px, 6vw, 78px); letter-spacing: -.06em; margin-bottom: 30px; }
-.cta-block h2 em { color: #f4ad87; }
 
 .product-list-section { background: var(--cream); }
 

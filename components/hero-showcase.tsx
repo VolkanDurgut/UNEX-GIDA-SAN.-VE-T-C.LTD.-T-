@@ -9,8 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
  * crossfade ile sabit bir fotoğrafa geçilir; fotoğraf `imageDuration` kadar
  * ekranda kalır, sonra tekrar crossfade ile videoya dönülür (video yeniden
  * baştan oynatılır) — döngü sonsuza kadar sürer. Sitenin diğer yerlerinde
- * zaten kullanılan AnimatePresence crossfade deseniyle (bkz. hero-slideshow.tsx)
- * aynı tekniği kullanır.
+ * zaten kullanılan AnimatePresence crossfade deseniyle aynı tekniği kullanır.
  */
 export function HeroShowcase({
   video,
