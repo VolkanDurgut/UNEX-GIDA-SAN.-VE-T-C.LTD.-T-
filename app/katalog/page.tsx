@@ -6,6 +6,20 @@ import { CatalogShowcase } from '@/components/catalog-showcase';
 export const metadata: Metadata = {
   title: 'Katalog',
   description: 'Unex Gıda ürün kataloglarını indirin — ürün portföyümüz ve uzmanlığımız hakkında detaylı bilgi.',
+  alternates: {
+    canonical: '/katalog',
+  },
+  openGraph: {
+    title: 'Katalog | Unex Gıda',
+    description: 'Unex Gıda ürün kataloglarını indirin — ürün portföyümüz ve uzmanlığımız hakkında detaylı bilgi.',
+    url: '/katalog',
+    images: [{ url: '/katalog-og.jpg', width: 1200, height: 630, alt: 'Unex Gıda Ekibi' }],
+  },
+  twitter: {
+    title: 'Katalog | Unex Gıda',
+    description: 'Unex Gıda ürün kataloglarını indirin — ürün portföyümüz ve uzmanlığımız hakkında detaylı bilgi.',
+    images: ['/katalog-og.jpg'],
+  },
 };
 
 export default function CatalogPage() {

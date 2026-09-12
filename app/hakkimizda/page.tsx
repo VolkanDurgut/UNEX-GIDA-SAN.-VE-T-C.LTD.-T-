@@ -10,6 +10,22 @@ export const metadata: Metadata = {
   title: 'Hakkımızda',
   description:
     '30 yılı aşkın tecrübe, 1 milyon tonun üzerinde işlenen buğday unu ve 50\'den fazla ülkeye ihracat — Unex Gıda\'nın hikayesi.',
+  alternates: {
+    canonical: '/hakkimizda',
+  },
+  openGraph: {
+    title: 'Hakkımızda | Unex Gıda',
+    description:
+      '30 yılı aşkın tecrübe, 1 milyon tonun üzerinde işlenen buğday unu ve 50\'den fazla ülkeye ihracat — Unex Gıda\'nın hikayesi.',
+    url: '/hakkimizda',
+    images: [{ url: '/hakkimizda-og.jpg', width: 1200, height: 630, alt: 'Unex Gıda Hakkımızda' }],
+  },
+  twitter: {
+    title: 'Hakkımızda | Unex Gıda',
+    description:
+      '30 yılı aşkın tecrübe, 1 milyon tonun üzerinde işlenen buğday unu ve 50\'den fazla ülkeye ihracat — Unex Gıda\'nın hikayesi.',
+    images: ['/hakkimizda-og.jpg'],
+  },
 };
 
 export default function AboutPage() {

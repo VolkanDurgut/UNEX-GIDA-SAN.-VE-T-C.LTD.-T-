@@ -23,8 +23,14 @@ export async function generateMetadata({
   return {
     title: product.name,
     description: `${product.description} Kullanım alanı: ${product.use}.`,
+    alternates: {
+      canonical: `/urunlerimiz/${product.slug}`,
+    },
     openGraph: product.image
-      ? { images: [{ url: product.image, width: 800, height: 800, alt: product.name }] }
+      ? {
+          url: `/urunlerimiz/${product.slug}`,
+          images: [{ url: product.image, width: 800, height: 800, alt: product.name }],
+        }
       : undefined,
   };
 }

@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     'Unex Gıda',
     'flour manufacturer Turkey',
   ],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     locale: 'tr_TR',
@@ -35,16 +38,13 @@ export const metadata: Metadata = {
     siteName,
     title: 'Unex Gıda | Buğday Unu Üretimi ve İhracatı',
     description: defaultDescription,
-    images: [{ url: '/hero-photo.jpg', width: 1200, height: 630, alt: 'Unex Gıda' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Unex Gıda' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Unex Gıda | Buğday Unu Üretimi ve İhracatı',
     description: defaultDescription,
-    images: ['/hero-photo.jpg'],
-  },
-  icons: {
-    icon: '/logo.png',
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -52,10 +52,38 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteName,
+  legalName: 'Unex Gıda San. ve Tic. Ltd. Şti.',
+  url: siteUrl,
+  logo: `${siteUrl}/logo.png`,
+  description: defaultDescription,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'İstiklal Mahallesi Cemal Ünlü Saraç Caddesi No:20',
+    addressLocality: 'Süleymanpaşa / Tekirdağ',
+    addressCountry: 'TR',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+90-282-440-08-70',
+    contactType: 'customer service',
+    email: 'info@unex.com.tr',
+    areaServed: 'TR',
+    availableLanguage: ['Turkish', 'English'],
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="tr" data-scroll-behavior="smooth" className={`${inter.variable} ${poppins.variable} ${caveat.variable}`}>
       <body className="site-shell">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Header />
         {children}
         <Footer />

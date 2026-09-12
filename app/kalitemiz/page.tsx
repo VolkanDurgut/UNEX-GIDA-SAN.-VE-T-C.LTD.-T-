@@ -11,6 +11,22 @@ export const metadata: Metadata = {
   title: 'Kalitemiz',
   description:
     'Kalite kontrolden ürün güvenilirliğine — Unex Gıda\'nın buğday unu üretim standartları ve ortaklarımıza sunduğumuz kesintisiz destek.',
+  alternates: {
+    canonical: '/kalitemiz',
+  },
+  openGraph: {
+    title: 'Kalitemiz | Unex Gıda',
+    description:
+      'Kalite kontrolden ürün güvenilirliğine — Unex Gıda\'nın buğday unu üretim standartları ve ortaklarımıza sunduğumuz kesintisiz destek.',
+    url: '/kalitemiz',
+    images: [{ url: '/kalitemiz-og.jpg', width: 1200, height: 630, alt: 'Unex Gıda Kalite Laboratuvarı' }],
+  },
+  twitter: {
+    title: 'Kalitemiz | Unex Gıda',
+    description:
+      'Kalite kontrolden ürün güvenilirliğine — Unex Gıda\'nın buğday unu üretim standartları ve ortaklarımıza sunduğumuz kesintisiz destek.',
+    images: ['/kalitemiz-og.jpg'],
+  },
 };
 
 export default function QualityPage() {

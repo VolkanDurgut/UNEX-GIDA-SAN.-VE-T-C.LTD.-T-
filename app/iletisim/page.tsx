@@ -7,6 +7,20 @@ import { ContactForm } from '@/components/contact-form';
 export const metadata: Metadata = {
   title: 'İletişim',
   description: 'Unex Gıda ile iletişime geçin — Tekirdağ merkez ofisimiz, telefon ve e-posta bilgilerimiz.',
+  alternates: {
+    canonical: '/iletisim',
+  },
+  openGraph: {
+    title: 'İletişim | Unex Gıda',
+    description: 'Unex Gıda ile iletişime geçin — Tekirdağ merkez ofisimiz, telefon ve e-posta bilgilerimiz.',
+    url: '/iletisim',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Unex Gıda' }],
+  },
+  twitter: {
+    title: 'İletişim | Unex Gıda',
+    description: 'Unex Gıda ile iletişime geçin — Tekirdağ merkez ofisimiz, telefon ve e-posta bilgilerimiz.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export default function ContactPage() {
