@@ -281,9 +281,13 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
   background: linear-gradient(135deg, var(--navy) 0%, #1c2b52 55%, #2a3a68 100%);
 }
 .page-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; filter: saturate(.85); }
+.page-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; filter: saturate(.85); }
 .hero-slideshow { position: absolute; inset: 0; overflow: hidden; }
 .hero-slideshow-frame { position: absolute; inset: 0; }
 .hero-slideshow-frame img { object-fit: cover; object-position: center 45%; filter: saturate(.85); }
+.hero-showcase { position: absolute; inset: 0; overflow: hidden; }
+.hero-showcase-frame { position: absolute; inset: 0; }
+.hero-showcase-frame img { object-fit: cover; object-position: center 45%; filter: saturate(.85); }
 .page-hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,17,28,.87), rgba(8,17,28,.3)); }
 .page-hero-content { position: relative; z-index: 2; }
 .page-hero h1 { font-size: clamp(46px, 7vw, 88px); font-weight: 600; letter-spacing: -.065em; line-height: .95; }
