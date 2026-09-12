@@ -8,6 +8,22 @@ export const metadata: Metadata = {
   title: 'Ürünlerimiz',
   description:
     'Biscuit Flour, Multi-Purpose Flour, Baker Flour, Baker Plus Flour, Super Baker Flour ve Noodle & Pasta Flour — Unex Gıda buğday unu serisi.',
+  alternates: {
+    canonical: '/urunlerimiz',
+  },
+  openGraph: {
+    title: 'Ürünlerimiz | Unex Gıda',
+    description:
+      'Biscuit Flour, Multi-Purpose Flour, Baker Flour, Baker Plus Flour, Super Baker Flour ve Noodle & Pasta Flour — Unex Gıda buğday unu serisi.',
+    url: '/urunlerimiz',
+    images: [{ url: '/kalitemiz-og.jpg', width: 1200, height: 630, alt: 'Unex Gıda Ürünleri' }],
+  },
+  twitter: {
+    title: 'Ürünlerimiz | Unex Gıda',
+    description:
+      'Biscuit Flour, Multi-Purpose Flour, Baker Flour, Baker Plus Flour, Super Baker Flour ve Noodle & Pasta Flour — Unex Gıda buğday unu serisi.',
+    images: ['/kalitemiz-og.jpg'],
+  },
 };
 
 export default function ProductsPage() {
