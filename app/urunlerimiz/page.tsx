@@ -17,6 +17,8 @@ export default function ProductsPage() {
         eyebrow="UNEX PALETİ"
         title={<>Ürünlerimiz<span>.</span></>}
         text="Her un, iyi bir fikrin ve daha iyi bir lezzetin başlangıcıdır."
+        video="/urunlerimiz-hero.mp4"
+        image="/quality-lab.jpg"
       />
       <section className="section-padding product-list-section">
         <div className="container">
