@@ -7,6 +7,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { products } from '@/lib/data';
 import { ProductCard } from './product-card';
 import { Reveal } from './motion-primitives';
+import { EASE } from '@/lib/motion';
 
 const PAGE_SIZE = 3;
 const AUTO_ADVANCE_MS = 5000;
@@ -57,7 +58,7 @@ export function ProductPreview() {
                 initial={{ opacity: 0, x: 24 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -24 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.4, ease: EASE }}
               >
                 {pages[page].map((product) => (
                   <ProductCard key={product.slug} product={product} />

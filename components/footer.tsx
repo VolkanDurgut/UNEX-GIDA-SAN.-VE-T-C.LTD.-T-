@@ -50,7 +50,7 @@ export function Footer() {
         </Reveal>
 
         <div className="footer-bottom">
-          <span>Copyright © 2025 Web sitemiz Tasdix ile tasdiklenmiştir.</span>
+          <span>Copyright © {new Date().getFullYear()} Web sitemiz Tasdix ile tasdiklenmiştir.</span>
           <span>Herhangi bir şekilde kopyalanması, çoğaltılması ve dağıtılması halinde yasal haklarımız işletilecektir.</span>
           <span className="footer-mark">UNEX / GROWING TOGETHER</span>
         </div>

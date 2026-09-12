@@ -5,8 +5,7 @@ import { Check } from 'lucide-react';
 import { values } from '@/lib/data';
 import { Reveal, RevealGroup, RevealItem } from './motion-primitives';
 import { FlourDust } from './flour-dust';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { EASE } from '@/lib/motion';
 
 function SettleItem({
   src,
