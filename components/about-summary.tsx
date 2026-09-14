@@ -37,7 +37,7 @@ export function AboutSummary() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
       >
-        <Image src="/about-bg.jpg" alt="" fill sizes="100vw" />
+        <video src="/urunlerimiz-hero.mp4" autoPlay loop muted playsInline aria-hidden="true" />
       </motion.div>
       <div className="intro-shade" />
       <FlourDust />
