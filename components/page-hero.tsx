@@ -11,6 +11,8 @@ export function PageHero({
   image,
   video,
   overlayImage,
+  overlayBlend = 'screen',
+  badgesImage,
   theme = 'dark',
   flourDust = false,
 }: {
@@ -30,6 +32,17 @@ export function PageHero({
    *  gibi göstermek için idealdir: siyah otomatik kaybolur, sadece parlak
    *  çizgi/noktalar fotoğrafın üstünde belirir. */
   overlayImage?: string;
+  /** 'screen' (varsayılan): koyu/siyah zeminli fotoğraflar için — siyah
+   *  otomatik kaybolur (bkz. Kalitemiz). 'normal': zaten şeffaf arka
+   *  planlı bir PNG kullanıyorsanız (siyah kısmı elle şeffaflaştırılmış)
+   *  bunu seçin — açık zeminlerde çok daha net/canlı görünür (bkz.
+   *  Hakkımızda). */
+  overlayBlend?: 'screen' | 'normal';
+  /** Sağ üst köşeye sabitlenen, şeffaf arka planlı bir rozet/sertifika
+   *  şeridi (ör. ISO/Halal rozetleri). Gerçek, hazır bir görsel olmalı —
+   *  burada asla yapay zeka ile üretilmiş/düzenlenmiş bir görsel
+   *  kullanılmamalı (metin bozulma riski). */
+  badgesImage?: string;
   /** 'dark' (varsayılan): mevcut lacivert/fotoğraf üstü beyaz metin.
    *  'light': beyaz zemin, lacivert başlık — iki koyu bölümün art arda
    *  gelmesini istemediğimiz sayfalarda (örn. Hakkımızda) kullanılır. */
@@ -47,8 +60,13 @@ export function PageHero({
         <Image src={image} alt="" fill priority sizes="100vw" />
       ) : null}
       {overlayImage ? (
-        <div className="page-hero-map-overlay">
+        <div className={overlayBlend === 'normal' ? 'page-hero-map-overlay page-hero-map-overlay-normal' : 'page-hero-map-overlay'}>
           <Image src={overlayImage} alt="" fill sizes="100vw" />
+        </div>
+      ) : null}
+      {badgesImage ? (
+        <div className="page-hero-badges">
+          <Image src={badgesImage} alt="ISO ve Helal sertifikaları" width={1151} height={180} />
         </div>
       ) : null}
       <div className="page-hero-shade" />
