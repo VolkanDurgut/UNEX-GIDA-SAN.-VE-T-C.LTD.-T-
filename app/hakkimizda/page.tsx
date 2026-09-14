@@ -42,6 +42,9 @@ export default function AboutPage() {
         }
         text="Kalite, dinamizm ve profesyonellik ile dünyanın dört bir yanına ulaşan bir ortaklık."
         image="/hakkimizda-hero.jpg"
+        overlayImage="/export-network-map-transparent.png"
+        overlayBlend="normal"
+        badgesImage="/certifications-badges-transparent.png"
         theme="light"
       />
 
