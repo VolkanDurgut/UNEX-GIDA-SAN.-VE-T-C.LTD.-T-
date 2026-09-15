@@ -563,7 +563,9 @@ input:focus, textarea:focus { border-color: var(--gold); }
 .button-status-outline { background: transparent; box-shadow: inset 0 0 0 1px rgba(34,48,87,.3); color: var(--navy); }
 .button-status-outline:hover { background: rgba(34,48,87,.06); box-shadow: inset 0 0 0 1px var(--navy); }
 
-/* ===== Sayfa geçiş overlay'i (bkz. components/page-transition.tsx) ===== */
+/* ===== Sayfa geçiş overlay'i (bkz. components/page-transition.tsx) =====
+   pointer-events:none ŞART — bileşen artık her zaman DOM'da duruyor
+   (görünmez haldeyken bile), bunsuz tüm sayfa tıklamalarını engeller. */
 .page-transition-overlay {
   position: fixed;
   inset: 0;
@@ -572,7 +574,9 @@ input:focus, textarea:focus { border-color: var(--gold); }
   align-items: center;
   justify-content: center;
   background: #fff;
+  pointer-events: none;
 }
+.page-transition-logo { position: relative; width: 72px; height: 72px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *:before, *:after { scroll-behavior: auto !important; transition: none !important; }

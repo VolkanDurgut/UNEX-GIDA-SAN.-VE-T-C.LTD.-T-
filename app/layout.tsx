@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { PageTransition } from '@/components/page-transition';
+import { TransitionProvider } from '@/components/transition-context';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const poppins = Poppins({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-poppins', display: 'swap' });
@@ -85,9 +86,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <Header />
-        <PageTransition />
-        {children}
+        <TransitionProvider>
+          <Header />
+          <PageTransition />
+          {children}
+        </TransitionProvider>
         <Footer />
       </body>
     </html>
