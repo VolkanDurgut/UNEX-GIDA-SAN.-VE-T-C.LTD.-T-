@@ -378,7 +378,7 @@ h1 em, h2 em { font-family: var(--font-caveat), cursive; font-weight: 500; color
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 32%, rgba(0,0,0,.4) 50%, #000 68%);
   mask-image: linear-gradient(90deg, transparent 0%, transparent 32%, rgba(0,0,0,.4) 50%, #000 68%);
 }
-.page-hero-badges { position: absolute; top: 34px; right: 48px; width: 380px; z-index: 2; pointer-events: none; }
+.page-hero-badges { position: relative; top: -55px; width: 320px; margin-bottom: 22px; }
 .page-hero-badges img { width: 100%; height: auto; display: block; }
 
 /* "İşinizi ileri taşırız" — 6 gerçek ürünümüz, Türk bayrağı rozetli,
@@ -482,7 +482,7 @@ input:focus, textarea:focus { border-color: var(--gold); }
   .nav-contact-desktop { display: none; }
   .nav.nav-open { display: flex; }
   .nav-contact { width: 100%; justify-content: center; }
-  .page-hero-badges { width: 200px; top: 16px; right: 16px; }
+  .page-hero-badges { width: 190px; margin-bottom: 16px; }
 
   .hero { min-height: 680px; }
   .hero-bg img { object-position: 85% center; }

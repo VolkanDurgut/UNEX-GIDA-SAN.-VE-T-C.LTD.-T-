@@ -38,10 +38,12 @@ export function PageHero({
    *  bunu seçin — açık zeminlerde çok daha net/canlı görünür (bkz.
    *  Hakkımızda). */
   overlayBlend?: 'screen' | 'normal';
-  /** Sağ üst köşeye sabitlenen, şeffaf arka planlı bir rozet/sertifika
-   *  şeridi (ör. ISO/Halal rozetleri). Gerçek, hazır bir görsel olmalı —
-   *  burada asla yapay zeka ile üretilmiş/düzenlenmiş bir görsel
-   *  kullanılmamalı (metin bozulma riski). */
+  /** Başlık bloğunun EN ÜSTÜNE, eyebrow satırının hemen üzerine eklenen
+   *  şeffaf arka planlı bir rozet/sertifika şeridi (ör. ISO/Halal
+   *  rozetleri) — metinle birlikte aynı akışta, aynı giriş animasyonuyla
+   *  belirir. Gerçek, hazır bir görsel olmalı — burada asla yapay zeka
+   *  ile üretilmiş/düzenlenmiş bir görsel kullanılmamalı (metin bozulma
+   *  riski). */
   badgesImage?: string;
   /** 'dark' (varsayılan): mevcut lacivert/fotoğraf üstü beyaz metin.
    *  'light': beyaz zemin, lacivert başlık — iki koyu bölümün art arda
@@ -64,15 +66,15 @@ export function PageHero({
           <Image src={overlayImage} alt="" fill sizes="100vw" />
         </div>
       ) : null}
-      {badgesImage ? (
-        <div className="page-hero-badges">
-          <Image src={badgesImage} alt="ISO ve Helal sertifikaları" width={1151} height={180} />
-        </div>
-      ) : null}
       <div className="page-hero-shade" />
       {flourDust ? <FlourDust /> : null}
       <div className="container page-hero-content">
         <Reveal>
+          {badgesImage ? (
+            <div className="page-hero-badges">
+              <Image src={badgesImage} alt="ISO ve Helal sertifikaları" width={1151} height={180} />
+            </div>
+          ) : null}
           <p className={theme === 'light' ? 'eyebrow' : 'eyebrow light'}>
             <span /> {eyebrow}
           </p>
