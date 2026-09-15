@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { EASE } from '@/lib/motion';
+import { useTransition } from './transition-context';
 
 const navItems = [
   { href: '/', label: 'Anasayfa' },
@@ -20,6 +21,7 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [homeScrolled, setHomeScrolled] = useState(false);
+  const { isTransitioning } = useTransition();
 
   const isHomepage = pathname === '/';
 
@@ -42,7 +44,15 @@ export function Header() {
     >
       <div className="container header-inner">
         <Link href="/" className="brand" aria-label="Unex ana sayfa">
-          <Image src="/logo.png" alt="Unex Gıda" width={47} height={47} priority />
+          <Image
+            src="/logo.png"
+            alt="Unex Gıda"
+            width={47}
+            height={47}
+            priority
+            className="brand-logo"
+            style={{ opacity: isTransitioning ? 0 : 1, transition: 'opacity .15s' }}
+          />
           <span>UNEX GIDA</span>
         </Link>
 
