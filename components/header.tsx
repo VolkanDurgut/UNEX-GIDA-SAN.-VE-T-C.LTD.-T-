@@ -3,8 +3,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import {
+  motion,
+  animate,
+  useMotionValue,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { EASE } from '@/lib/motion';
 import { useTransition } from './transition-context';
@@ -22,6 +29,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [homeScrolled, setHomeScrolled] = useState(false);
   const { isTransitioning } = useTransition();
+  const reduceMotion = useReducedMotion();
 
   const isHomepage = pathname === '/';
 
@@ -35,6 +43,44 @@ export function Header() {
 
   const transparent = isHomepage && !homeScrolled;
 
+  // ===== Scroll ile dönen logo (UnexLidas projesinden uyarlanmıştır) =====
+  // Kaydırma miktarına ORANTILI olarak logoyu 3D Y-ekseninde döndürür.
+  // Kaydırma durduğunda (150ms hareketsizlik), açıyı en yakın tam tura
+  // (360°'nin katı) bir "spring" ile yumuşakça yerleştirip sıfırlar —
+  // böylece açı sonsuza kadar büyümez, ve durma anı her zaman görsel
+  // olarak "düz" (0°) bir logo ile biter.
+  const { scrollY } = useScroll();
+  const logoRotateY = useMotionValue(0);
+  const lastScrollY = useRef(0);
+  const snapTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+  }, []);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (reduceMotion) return;
+
+    const delta = latest - lastScrollY.current;
+    lastScrollY.current = latest;
+
+    // Anchor linkine atlama gibi büyük/anlık sıçramalarda çılgınca
+    // dönmesin diye üst sınır.
+    if (Math.abs(delta) > 150) return;
+
+    logoRotateY.set(logoRotateY.get() + delta * 0.8);
+
+    if (snapTimeout.current) clearTimeout(snapTimeout.current);
+    snapTimeout.current = setTimeout(() => {
+      const currentAngle = logoRotateY.get();
+      const targetAngle = Math.round(currentAngle / 360) * 360;
+      animate(logoRotateY, targetAngle, { type: 'spring', stiffness: 200, damping: 20 }).then(() => {
+        logoRotateY.set(0);
+      });
+    }, 150);
+  });
+  // ==========================================================
+
   return (
     <motion.header
       className={`header ${transparent ? 'header-transparent' : ''}`}
@@ -43,16 +89,18 @@ export function Header() {
       transition={{ duration: 0.6, ease: EASE }}
     >
       <div className="container header-inner">
-        <Link href="/" className="brand" aria-label="Unex ana sayfa">
-          <Image
-            src="/logo.png"
-            alt="Unex Gıda"
-            width={47}
-            height={47}
-            priority
-            className="brand-logo"
-            style={{ opacity: isTransitioning ? 0 : 1, transition: 'opacity .15s' }}
-          />
+        <Link href="/" className="brand" aria-label="Unex ana sayfa" style={{ perspective: 1000 }}>
+          <motion.div style={{ rotateY: logoRotateY }}>
+            <Image
+              src="/logo.png"
+              alt="Unex Gıda"
+              width={47}
+              height={47}
+              priority
+              className="brand-logo"
+              style={{ opacity: isTransitioning ? 0 : 1, transition: 'opacity .15s' }}
+            />
+          </motion.div>
           <span>UNEX GIDA</span>
         </Link>
 
